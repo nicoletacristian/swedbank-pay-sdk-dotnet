@@ -18,9 +18,11 @@ namespace SwedbankPay.Sdk.PaymentOrders
                 }
             }
             PayeeReference = transaction.PayeeReference;
+            ReceiptReference = transaction.ReceiptReference;
             VatAmount = transaction.VatAmount.InLowestMonetaryUnit;
         }
 
+        
         public long Amount { get; }
 
         public string Description { get; }
@@ -28,6 +30,8 @@ namespace SwedbankPay.Sdk.PaymentOrders
         public List<OrderItemDto> OrderItems { get; }
 
         public string PayeeReference { get; }
+
+        public string ReceiptReference { get; }
 
         public long VatAmount { get; }
     }

@@ -6,15 +6,16 @@
     public class PaymentOrderReversalRequest
     {
         /// <summary>
-        /// Instantaites a <see cref="PaymentOrderReversalRequest"/> with the provided parameters.
+        /// Instantiates a <see cref="PaymentOrderReversalRequest"/> with the provided parameters.
         /// </summary>
         /// <param name="amount">The amount to refund to the payer.</param>
         /// <param name="vatAmount">The amount of VAT to refund.</param>
         /// <param name="description">Textual description of the reversal.</param>
         /// <param name="payeeReference">Unique ID set by the merchant for this transaction.</param>
-        public PaymentOrderReversalRequest(Amount amount, Amount vatAmount, string description, string payeeReference)
+        /// <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
+        public PaymentOrderReversalRequest(Amount amount, Amount vatAmount, string description, string payeeReference, string receiptReference)
         {
-            Transaction = new PaymentOrderReversalTransaction(amount, vatAmount, description, payeeReference);
+            Transaction = new PaymentOrderReversalTransaction(amount, vatAmount, description, payeeReference, receiptReference);
         }
 
         /// <summary>

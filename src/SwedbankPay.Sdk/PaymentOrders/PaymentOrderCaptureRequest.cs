@@ -12,9 +12,10 @@
         /// <param name="vatAmount">The amount of funds to capture as value added taxes.</param>
         /// <param name="description">A textual description of the capture.</param>
         /// <param name="payeeReference">Transactionally unique reference from the merchant system.</param>
-        public PaymentOrderCaptureRequest(Amount amount, Amount vatAmount, string description, string payeeReference)
+        /// <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
+        public PaymentOrderCaptureRequest(Amount amount, Amount vatAmount, string description, string payeeReference, string receiptReference)
         {
-            Transaction = new PaymentOrderCaptureTransaction(amount, vatAmount, description, payeeReference);
+            Transaction = new PaymentOrderCaptureTransaction(amount, vatAmount, description, payeeReference, receiptReference);
         }
 
         /// <summary>

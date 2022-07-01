@@ -17,13 +17,18 @@ namespace SwedbankPay.Sdk.PaymentOrders
         protected internal PaymentOrderReversalTransaction(Amount amount,
                                                Amount vatAmount,
                                                string description,
-                                               string payeeReference)
+                                               string payeeReference,
+                                               string receiptReference)
         {
             Amount = amount;
             VatAmount = vatAmount;
             Description = description;
             PayeeReference = payeeReference;
+            ReceiptReference = receiptReference;
         }
+
+
+        public string ReceiptReference { get; }
 
         /// <summary>
         /// The <seealso cref="Sdk.Amount"/> that is being reversed to the payer.

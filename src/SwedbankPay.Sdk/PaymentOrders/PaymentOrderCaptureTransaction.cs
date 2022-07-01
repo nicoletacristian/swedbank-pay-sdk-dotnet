@@ -14,16 +14,24 @@ namespace SwedbankPay.Sdk.PaymentOrders
         /// <param name="vatAmount">The amount of funds to capture as value added taxes.</param>
         /// <param name="description">A textual description of the capture.</param>
         /// <param name="payeeReference">Transactionally unique reference from the merchant system.</param>
+        /// <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
         protected internal PaymentOrderCaptureTransaction(Amount amount,
-                                                Amount vatAmount,
-                                                string description,
-                                                string payeeReference)
+                                                          Amount vatAmount,
+                                                          string description,
+                                                          string payeeReference,
+                                                          string receiptReference)
         {
             Amount = amount;
             VatAmount = vatAmount;
             Description = description;
             PayeeReference = payeeReference;
+            ReceiptReference = receiptReference;
         }
+
+        /// <summary>
+        /// A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.
+        /// </summary>
+        public string ReceiptReference { get; set; }
 
         /// <summary>
         /// The <seealso cref="Sdk.Amount"/> (including VAT, if any) to charge the payer
