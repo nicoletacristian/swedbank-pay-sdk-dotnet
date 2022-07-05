@@ -8,10 +8,11 @@ using SwedbankPay.Sdk.PaymentInstruments.MobilePay;
 using SwedbankPay.Sdk.PaymentInstruments.Swish;
 using SwedbankPay.Sdk.PaymentInstruments.Trustly;
 using SwedbankPay.Sdk.PaymentInstruments.Vipps;
-using SwedbankPay.Sdk.PaymentOrders;
 
 using System;
 using System.Net.Http;
+
+using SwedbankPay.Sdk.PaymentOrders.V2;
 
 namespace SwedbankPay.Sdk.Extensions
 {
@@ -29,15 +30,20 @@ namespace SwedbankPay.Sdk.Extensions
 		public static IHttpClientBuilder AddSwedbankPayClient(this IServiceCollection services, Uri baseAddress, string authenticationToken)
 		{
 			if (string.IsNullOrWhiteSpace(authenticationToken))
-				throw new ArgumentNullException(nameof(authenticationToken));
-			if (Uri.IsWellFormedUriString(baseAddress.OriginalString, UriKind.Absolute) == false)
-				throw new ArgumentException($"{nameof(baseAddress)} is not a well formed and absolute {nameof(Uri)}.");
+            {
+                throw new ArgumentNullException(nameof(authenticationToken));
+            }
 
-			return AddClientAndHandler(services, a =>
-			{
-				a.BaseAddress = baseAddress;
-				a.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authenticationToken);
-			});
+            if (Uri.IsWellFormedUriString(baseAddress.OriginalString, UriKind.Absolute) == false)
+            {
+                throw new ArgumentException($"{nameof(baseAddress)} is not a well formed and absolute {nameof(Uri)}.");
+            }
+
+            return AddClientAndHandler(services, a =>
+            {
+                a.BaseAddress = baseAddress;
+                a.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authenticationToken);
+            });
 		}
 
 		/// <summary>

@@ -5,11 +5,16 @@ using System;
 using System.Net;
 using System.Net.Http;
 
+using SwedbankPay.Sdk.PaymentOrders.V2;
+using SwedbankPay.Sdk.PaymentOrders.V3;
+
+using PaymentOrdersResource = SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrdersResource;
+
 namespace SwedbankPay.Sdk
 {
     public class SwedbankPayClient : ISwedbankPayClient
     {
-        public SwedbankPayClient(HttpClient httpClient, IPaymentOrdersResource paymentOrders, IConsumersResource consumers, IPaymentInstrumentsResource payments)
+        public SwedbankPayClient(HttpClient httpClient, CheckoutV2 checkoutV2, CheckoutV3 checkoutV3, IPaymentInstrumentsResource payments)
         {
             if (!ServicePointManager.SecurityProtocol.HasFlag(SecurityProtocolType.Tls12))
             {
@@ -35,21 +40,22 @@ namespace SwedbankPay.Sdk
                 httpClient.DefaultRequestHeaders.Add("User-Agent", UserAgent.Default);
             }
 
-            PaymentOrders = paymentOrders ?? throw new ArgumentNullException(nameof(paymentOrders));
-            Consumers = consumers ?? throw new ArgumentNullException(nameof(consumers));
             Payments = payments ?? throw new ArgumentNullException(nameof(payments));
+            CheckoutV2 = checkoutV2 ?? throw new ArgumentNullException(nameof(checkoutV2));
+            CheckoutV3 = checkoutV3 ?? throw new ArgumentNullException(nameof(checkoutV3));
         }
 
         public SwedbankPayClient(HttpClient httpClient) :
             this(
                 httpClient,
-                new PaymentOrdersResource(httpClient),
-                new ConsumersResource(httpClient),
+                new CheckoutV2(httpClient, new PaymentOrders.V2.PaymentOrdersResource(httpClient), new ConsumersResource(httpClient)),
+                new CheckoutV3(httpClient, new PaymentOrdersResource(httpClient)),
                 new PaymentsResource(httpClient))
         { }
 
-        public IPaymentOrdersResource PaymentOrders { get; }
-        public IConsumersResource Consumers { get; }
+
         public IPaymentInstrumentsResource Payments { get; }
+        public ICheckoutV2 CheckoutV2 { get; }
+        public ICheckoutV3 CheckoutV3 { get; }
     }
 }

@@ -57,12 +57,18 @@
 </table>
 <div class="text-center">
     <a class="btn btn-primary" automation="button-checkout" asp-action="InitiateConsumerSession" asp-controller="CheckOut">
-        Standard Checkout
+        Checkout V2/Checkin
     </a>
     <a class="btn btn-primary" automation="button-checkout" asp-action="LoadPaymentMenu" asp-controller="CheckOut">
-        Anonymous Checkout
+        Checkout V2/Payment Menu
     </a>
     <a class="btn btn-secondary" automation="button-checkout" asp-action="LoadCardPaymentMenu" asp-controller="CheckOut">
-        Payment page
+        Payment Instruments
+    </a>
+    <a class="btn btn-warning" automation="button-checkout" asp-action="CheckoutV3SeamlessView" asp-controller="CheckOut">
+        Checkout V3 Seamless
+    </a>
+    <a class="btn btn-warning" automation="button-checkout" asp-action="CheckoutV3Redirect" asp-controller="CheckOut">
+        Checkout V3 Redirect
     </a>
 </div>

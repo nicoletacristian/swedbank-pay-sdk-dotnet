@@ -1,9 +1,13 @@
 ﻿using Atata;
+
 using NUnit.Framework;
+
 using Sample.AspNetCore.SystemTests.Test.Helpers;
+
 using SwedbankPay.Sdk;
 using SwedbankPay.Sdk.PaymentInstruments;
-using SwedbankPay.Sdk.PaymentOrders;
+using SwedbankPay.Sdk.PaymentOrders.V2;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,7 +37,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Standard
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
-                var order = await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                var order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
 
                 // Operations
                 Assert.That(order.Operations[LinkRelation.CreatePaymentOrderCancel], Is.Null);
@@ -67,7 +71,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Standard
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
-                var order = await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                var order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
                 var counter = 0;
 
                 while (order.PaymentOrder.CurrentPayment.Payment.Transactions.TransactionList.First(x => x.Type == TransactionType.Reversal).State != State.Completed && counter <= 15)
@@ -75,7 +79,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Standard
                     await Task.Delay(1000).ConfigureAwait(false);
                     try
                     {
-                        order = await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                        order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
                     }
                     catch { }
                     counter++;
@@ -113,7 +117,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Standard
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
-                var order = await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                var order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
 
                 // Operations
                 Assert.That(order.Operations[LinkRelation.CreatePaymentOrderCancel], Is.Null);

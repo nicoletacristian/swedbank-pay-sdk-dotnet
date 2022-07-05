@@ -2,12 +2,17 @@
 using SwedbankPay.Sdk.PaymentInstruments;
 using SwedbankPay.Sdk.PaymentOrders;
 using SwedbankPay.Sdk.Tests.TestHelpers;
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+
 using Xunit;
+
+using PaymentOrderRequest = SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequest;
+using PaymentOrdersResource = SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrdersResource;
 
 namespace SwedbankPay.Sdk.Tests.PaymentTests
 {
@@ -179,7 +184,7 @@ namespace SwedbankPay.Sdk.Tests.PaymentTests
 
         private static PaymentOrderCaptureRequest GetTestPaymentOrderCaptureRequest()
         {
-            var req = new PaymentOrderCaptureRequest(new Amount(25767), new Amount(0), "Capturing payment.", "637218522761159010");
+            var req = new PaymentOrderCaptureRequest(new Amount(25767), new Amount(0), "Capturing payment.", "637218522761159010", "ReceiptRef");
             req.Transaction.OrderItems.Add(new OrderItem(
                     "Test",
                     "Test",

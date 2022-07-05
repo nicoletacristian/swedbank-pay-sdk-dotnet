@@ -16,7 +16,7 @@
 
         public bool EnableEcomOnly { get; set; }
         public int PaymentRestrictedToAgeLimit { get; set; }
-
+        
         public string PaymentRestrictedToSocialSecurityNumber { get; set; }
     }
 }

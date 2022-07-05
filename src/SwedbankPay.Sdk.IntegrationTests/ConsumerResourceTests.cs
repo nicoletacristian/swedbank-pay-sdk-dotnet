@@ -17,7 +17,7 @@ namespace SwedbankPay.Sdk.IntegrationTests
                 .Build();
 
             //ACT
-            var consumer = await this.Sut.Consumers.InitiateSession(orderResoureRequest);
+            var consumer = await this.Sut.CheckoutV2.Consumers.InitiateSession(orderResoureRequest);
 
             //ASSERT
             Assert.NotNull(consumer);
@@ -32,7 +32,7 @@ namespace SwedbankPay.Sdk.IntegrationTests
             var orderResoureRequest = this.consumerResourceRequestContainer.WithTestValues()
                 .Build();
             //ACT
-            var consumer = await this.Sut.Consumers.InitiateSession(orderResoureRequest);
+            var consumer = await this.Sut.CheckoutV2.Consumers.InitiateSession(orderResoureRequest);
             //ASSERT
 
             Assert.NotNull(consumer);
@@ -48,7 +48,7 @@ namespace SwedbankPay.Sdk.IntegrationTests
             var orderResoureRequest = this.consumerResourceRequestContainer.WithTestValues()
                 .Build();
             //ACT
-            var consumer = await this.Sut.Consumers.InitiateSession(orderResoureRequest);
+            var consumer = await this.Sut.CheckoutV2.Consumers.InitiateSession(orderResoureRequest);
             //ASSERT
 
             Assert.NotNull(consumer);

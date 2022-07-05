@@ -11,7 +11,7 @@
 
 using SwedbankPay.Sdk.Consumers;
 using SwedbankPay.Sdk.PaymentInstruments;
-using SwedbankPay.Sdk.PaymentOrders;
+using SwedbankPay.Sdk.PaymentOrders.V2;
 
 namespace SwedbankPay.Sdk
 {
@@ -131,12 +131,12 @@ namespace SwedbankPay.Sdk
         public static readonly LinkRelation CreateSale = new LinkRelation(nameof(CreateSale), PaymentResourceOperations.CreateSale);
 
         /// <summary>
-        /// <seealso cref="LinkRelation"/> for Paymen RedirectSale.
+        /// <seealso cref="LinkRelation"/> for Payment RedirectSale.
         /// </summary>
         public static readonly LinkRelation RedirectSale = new LinkRelation(nameof(RedirectSale), PaymentResourceOperations.RedirectSale);
 
         /// <summary>
-        /// <seealso cref="LinkRelation"/> for Paymen ViewSale.
+        /// <seealso cref="LinkRelation"/> for Payment ViewSale.
         /// </summary>
         public static readonly LinkRelation ViewSales = new LinkRelation(nameof(ViewSales), PaymentResourceOperations.ViewSale);
 

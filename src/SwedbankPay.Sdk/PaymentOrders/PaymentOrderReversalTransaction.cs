@@ -14,11 +14,12 @@ namespace SwedbankPay.Sdk.PaymentOrders
         /// <param name="vatAmount">The amount of VAT to refund.</param>
         /// <param name="description">Textual description of the reversal.</param>
         /// <param name="payeeReference">Unique ID set by the merchant for this transaction.</param>
+        /// <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
         protected internal PaymentOrderReversalTransaction(Amount amount,
-                                               Amount vatAmount,
-                                               string description,
-                                               string payeeReference,
-                                               string receiptReference)
+                                                           Amount vatAmount,
+                                                           string description,
+                                                           string payeeReference,
+                                                           string receiptReference)
         {
             Amount = amount;
             VatAmount = vatAmount;
@@ -27,7 +28,9 @@ namespace SwedbankPay.Sdk.PaymentOrders
             ReceiptReference = receiptReference;
         }
 
-
+        /// <summary>
+        /// A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.
+        /// </summary>
         public string ReceiptReference { get; }
 
         /// <summary>

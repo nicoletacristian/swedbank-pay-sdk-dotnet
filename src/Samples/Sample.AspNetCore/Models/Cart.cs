@@ -24,6 +24,7 @@ namespace Sample.AspNetCore.Models
         public PaymentInstrument Instrument { get; set; }
         public string ConsumerUiScriptSource { get; set; }
         public string ConsumerProfileRef { get; set; }
+        public int Version { get; set; }
 
 
         public virtual void AddItem(Product product, int quantity)

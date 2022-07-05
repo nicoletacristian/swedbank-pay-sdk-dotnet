@@ -1,6 +1,4 @@
-﻿using SwedbankPay.Sdk.Consumers;
-using SwedbankPay.Sdk.PaymentInstruments;
-using SwedbankPay.Sdk.PaymentOrders;
+﻿using SwedbankPay.Sdk.PaymentInstruments;
 
 namespace SwedbankPay.Sdk
 {
@@ -11,14 +9,14 @@ namespace SwedbankPay.Sdk
     public interface ISwedbankPayClient
     {
         /// <summary>
-        /// Resource to create and get payment orders.
+        /// Checkout V2
         /// </summary>
-        IPaymentOrdersResource PaymentOrders { get; }
+        ICheckoutV2 CheckoutV2 { get; }
 
         /// <summary>
-        /// Resource to access consumer information.
+        /// Checkout V3
         /// </summary>
-        IConsumersResource Consumers { get; }
+        ICheckoutV3 CheckoutV3 { get; }
 
         /// <summary>
         /// Resource to create and get payments on several payment instruments.

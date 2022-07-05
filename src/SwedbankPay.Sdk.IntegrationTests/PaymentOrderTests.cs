@@ -5,6 +5,9 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+
+using SwedbankPay.Sdk.PaymentOrders.V2;
+
 using Xunit;
 
 namespace SwedbankPay.Sdk.Tests
@@ -22,7 +25,7 @@ namespace SwedbankPay.Sdk.Tests
             var paymentOrderRequest = this.paymentOrderRequestBuilder.WithTestValues(this.payeeId).Build();
 
             //ACT
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
             Assert.NotNull(paymentOrder);
             Assert.NotEmpty(paymentOrder.Operations);
             Assert.NotNull(paymentOrder.Operations.Abort);
@@ -35,17 +38,16 @@ namespace SwedbankPay.Sdk.Tests
         }
 
 
-
         [Fact]
         public async Task CreateAndGetPaymentOrder_ShouldReturnPaymentOrderWithSameAmountAndMetadata()
         {
             var paymentOrderRequest = this.paymentOrderRequestBuilder.WithTestValues(this.payeeId).Build();
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
             Assert.NotNull(paymentOrder);
             Assert.NotNull(paymentOrder.PaymentOrder);
             var amount = paymentOrder.PaymentOrder.Amount;
 
-            var paymentOrder2 = await this.Sut.PaymentOrders.Get(paymentOrder.PaymentOrder.Id, PaymentOrderExpand.All);
+            var paymentOrder2 = await this.Sut.CheckoutV2.PaymentOrders.Get(paymentOrder.PaymentOrder.Id, PaymentOrderExpand.All);
             Assert.NotNull(paymentOrder2);
             Assert.NotNull(paymentOrder2.PaymentOrder);
             Assert.Equal(amount.InLowestMonetaryUnit, paymentOrder2.PaymentOrder.Amount.InLowestMonetaryUnit);
@@ -58,7 +60,7 @@ namespace SwedbankPay.Sdk.Tests
         public async Task CreateAndUpdateOnlyAmountOnPaymentOrder_ShouldThrowHttpResponseException()
         {
             var paymentOrderRequest = this.paymentOrderRequestBuilder.WithTestValues(this.payeeId).WithAmounts().Build();
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
             Assert.NotNull(paymentOrder);
             Assert.NotNull(paymentOrder.PaymentOrder);
 
@@ -72,7 +74,7 @@ namespace SwedbankPay.Sdk.Tests
         public async Task CreateAndUpdatePaymentOrder_WithOrderItems_ShouldNotThrowHttpResponseException()
         {
             var paymentOrderRequest = this.paymentOrderRequestBuilder.WithTestValues(this.payeeId).WithOrderItems().Build();
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
             Assert.NotNull(paymentOrder);
             Assert.NotNull(paymentOrder.PaymentOrder);
 
@@ -93,7 +95,7 @@ namespace SwedbankPay.Sdk.Tests
         {
             var paymentOrderRequest = this.paymentOrderRequestBuilder.WithTestValues(this.payeeId).Build();
 
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequest, PaymentOrderExpand.All);
             Assert.NotNull(paymentOrder);
             Assert.NotNull(paymentOrder.PaymentOrder);
 
@@ -112,7 +114,7 @@ namespace SwedbankPay.Sdk.Tests
         public async Task CreatePaymentOrder_ShouldReturnPaymentOrderWithCorrectAmount()
         {
             var paymentOrderRequest = this.paymentOrderRequestBuilder.WithTestValues(this.payeeId).Build();
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequest);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequest);
             Assert.NotNull(paymentOrder.PaymentOrder);
             Assert.Equal(paymentOrderRequest.PaymentOrder.Amount, paymentOrder.PaymentOrder.Amount);
         }
@@ -127,7 +129,7 @@ namespace SwedbankPay.Sdk.Tests
                     .Build();
 
             //ACT
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequestContainer, PaymentOrderExpand.OrderItems);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequestContainer, PaymentOrderExpand.OrderItems);
 
             //ASSERT
             Assert.NotNull(paymentOrder.PaymentOrder);
@@ -148,7 +150,7 @@ namespace SwedbankPay.Sdk.Tests
                     .Build();
 
             //ACT
-            var paymentOrder = await this.Sut.PaymentOrders.Create(paymentOrderRequestContainer, PaymentOrderExpand.OrderItems);
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Create(paymentOrderRequestContainer, PaymentOrderExpand.OrderItems);
 
             //ASSERT
             Assert.NotNull(paymentOrder.PaymentOrder);
@@ -172,7 +174,7 @@ namespace SwedbankPay.Sdk.Tests
                     .Build();
 
             //ACT
-            var paymentOrder = await this.Sut.PaymentOrders.Get(new Uri("/psp/paymentorders/472e6f26-a9b5-4e91-1b70-08d756b9b7d8", UriKind.Relative),
+            var paymentOrder = await this.Sut.CheckoutV2.PaymentOrders.Get(new Uri("/psp/paymentorders/472e6f26-a9b5-4e91-1b70-08d756b9b7d8", UriKind.Relative),
                                                                 PaymentOrderExpand.CurrentPayment);
 
             //ASSERT
@@ -186,7 +188,7 @@ namespace SwedbankPay.Sdk.Tests
         {
             var id = new Uri("/psp/paymentorders/56a45c8a-9605-437a-fb80-08d742822747", UriKind.Relative);
 
-            var thrownException = await Assert.ThrowsAsync<HttpResponseException>(() => this.Sut.PaymentOrders.Get(id));
+            var thrownException = await Assert.ThrowsAsync<HttpResponseException>(() => this.Sut.CheckoutV2.PaymentOrders.Get(id));
             Assert.Equal(HttpStatusCode.NotFound, thrownException.HttpResponse.StatusCode);
         }
     }

@@ -1,5 +1,5 @@
 ﻿using SwedbankPay.Sdk.PaymentInstruments;
-using SwedbankPay.Sdk.PaymentOrders;
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,9 +17,9 @@ namespace SwedbankPay.Sdk.Extensions
             return url;
         }
 
-        public static Uri GetUrlWithQueryString(this Uri uri, PaymentOrderExpand paymentExpand)
+        public static Uri GetUrlWithQueryString<T>(this Uri uri, T paymentExpand) where T : Enum
         {
-            string paymentExpandQueryString = GetExpandQueryString<PaymentOrderExpand>(paymentExpand);
+            string paymentExpandQueryString = GetExpandQueryString<T>(paymentExpand);
             var url = !string.IsNullOrWhiteSpace(paymentExpandQueryString)
                 ? new Uri(uri.OriginalString + paymentExpandQueryString, UriKind.RelativeOrAbsolute)
                 : uri;

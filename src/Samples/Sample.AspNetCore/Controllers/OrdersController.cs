@@ -99,9 +99,18 @@ namespace Sample.AspNetCore.Controllers
                 IEnumerable<HttpOperation> operations = Enumerable.Empty<HttpOperation>();
                 if (order.PaymentOrderLink != null)
                 {
-                    var paymentOrder = await this.swedbankPayClient.PaymentOrders.Get(order.PaymentOrderLink);
-                    var paymentOrderOperations = paymentOrder.Operations.Where(r => r.Key.Value.Contains("paymentorder")).Select(x => x.Value);
-                    operations = paymentOrderOperations;
+                    if (order.Version == 2)
+                    {
+                        var paymentOrder = await this.swedbankPayClient.CheckoutV2.PaymentOrders.Get(order.PaymentOrderLink);
+                        var paymentOrderOperations = paymentOrder.Operations.Select(x => x.Value);
+                        operations = paymentOrderOperations;
+                    }
+                    else
+                    {
+                        var paymentOrder = await this.swedbankPayClient.CheckoutV3.PaymentOrders.Get(order.PaymentOrderLink);
+                        var paymentOrderOperations = paymentOrder.Operations.Select(x => x.Value);
+                        operations = paymentOrderOperations;
+                    }
                 }
                 else
                 {

@@ -901,6 +901,66 @@
             Payers zip code of their country of residence.
             </summary>
         </member>
+        <member name="T:SwedbankPay.Sdk.IAddressResponse">
+            <summary>
+            Holds shared information about a address.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.IAddressResponse.Addressee">
+            <summary>
+            The name of the addressee – the receiver of the shipped goods.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.IAddressResponse.CoAddress">
+            <summary>
+            The C/O address of the payer, if applicable.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.IAddressResponse.StreetAddress">
+            <summary>
+            Payers street address in their city of residence.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.IAddressResponse.ZipCode">
+            <summary>
+            Payers zip code of their country of residence.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.IAddressResponse.City">
+            <summary>
+            The payers city of residence.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.IAddressResponse.CountryCode">
+            <summary>
+            The country code of the payers country of residence.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.ICheckoutV2">
+            <summary>
+            Checkout v2
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.ICheckoutV2.PaymentOrders">
+            <summary>
+            Payment orders resource
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.ICheckoutV2.Consumers">
+            <summary>
+            Consumers resource
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.ICheckoutV3">
+            <summary>
+            Checkout v3
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.ICheckoutV3.PaymentOrders">
+            <summary>
+            Payment orders resource
+            </summary>
+        </member>
         <member name="T:SwedbankPay.Sdk.Identifiable">
             <summary>
             Contains a <seealso cref="T:System.Uri"/> to a uniquely identifiable resource.
@@ -932,6 +992,39 @@
             <summary>
             The relative URI and unique identifier of the payment resource .
             </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.InitiatedByType">
+            <summary>
+            The different types of initiated by
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.InitiatedByType.Consumer">
+            <summary>
+            Initiated by consumer
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.InitiatedByType.Merchant">
+            <summary>
+            Initiated by merchant
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.InitiatedByType.System">
+            <summary>
+            Initiated by system
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.InitiatedByType.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:SwedbankPay.Sdk.InitiatedByType.op_Implicit(System.String)~SwedbankPay.Sdk.InitiatedByType">
+            <summary>
+            Converts a <see cref="T:System.String"/> to a <see cref="T:SwedbankPay.Sdk.InitiatedByType"/>.
+            </summary>
+            <param name="type">The API value to convert.</param>
         </member>
         <member name="T:SwedbankPay.Sdk.IOperationList">
             <summary>
@@ -1310,14 +1403,14 @@
             Used to access the different APIs'.
             </summary>
         </member>
-        <member name="P:SwedbankPay.Sdk.ISwedbankPayClient.PaymentOrders">
+        <member name="P:SwedbankPay.Sdk.ISwedbankPayClient.CheckoutV2">
             <summary>
-            Resource to create and get payment orders.
+            Checkout V2
             </summary>
         </member>
-        <member name="P:SwedbankPay.Sdk.ISwedbankPayClient.Consumers">
+        <member name="P:SwedbankPay.Sdk.ISwedbankPayClient.CheckoutV3">
             <summary>
-            Resource to access consumer information.
+            Checkout V3
             </summary>
         </member>
         <member name="P:SwedbankPay.Sdk.ISwedbankPayClient.Payments">
@@ -1495,12 +1588,12 @@
         </member>
         <member name="F:SwedbankPay.Sdk.LinkRelation.RedirectSale">
             <summary>
-            <seealso cref="T:SwedbankPay.Sdk.LinkRelation"/> for Paymen RedirectSale.
+            <seealso cref="T:SwedbankPay.Sdk.LinkRelation"/> for Payment RedirectSale.
             </summary>
         </member>
         <member name="F:SwedbankPay.Sdk.LinkRelation.ViewSales">
             <summary>
-            <seealso cref="T:SwedbankPay.Sdk.LinkRelation"/> for Paymen ViewSale.
+            <seealso cref="T:SwedbankPay.Sdk.LinkRelation"/> for Payment ViewSale.
             </summary>
         </member>
         <member name="F:SwedbankPay.Sdk.LinkRelation.AbortedPayment">
@@ -6714,6 +6807,108 @@
             Set to 0 (zero) if there is no VAT amount charged.
             </summary>
         </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.CancelledDetails">
+            <summary>
+            Details connected to the payment.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.CancelledDetails.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nonPaymentToken"></param>
+            <param name="externalNonPaymentToken"></param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.CancelledDetails.NonPaymentToken">
+            <summary>
+            The result of our own card tokenization. Activated in POS for the merchant or merchant group.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.CancelledDetails.ExternalNonPaymentToken">
+            <summary>
+            The result of an external tokenization. This value will vary depending on card types, acquirers, customers, etc. For Mass Transit merchants, transactions redeemed by Visa will be populated with PAR. For Mastercard and Amex, it will be our own token.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IAbortedResponse">
+            <summary>
+            Information about the aborted transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IAbortedResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IAbortedResponse.AbortReason">
+            <summary>
+            Why the payment was aborted.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.ICancelledDetails">
+            <summary>
+            Details connected to the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledDetails.NonPaymentToken">
+            <summary>
+            The result of our own card tokenization. Activated in POS for the merchant or merchant group.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledDetails.ExternalNonPaymentToken">
+            <summary>
+            The result of an external tokenization. This value will vary depending on card types, acquirers, customers, etc. For Mass Transit merchants, transactions redeemed by Visa will be populated with PAR. For Mastercard and Amex, it will be our own token.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse">
+            <summary>
+            Information about the cancelled transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.CancelReason">
+            <summary>
+            Why the payment was cancelled.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.Instrument">
+            <summary>
+            Payment instrument used in the cancelled payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.Number">
+            <summary>
+            The transaction number, useful when there’s need to reference the transaction in human communication. Not usable for programmatic identification of the transaction, where id should be used instead.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.PayeeReference">
+            <summary>
+            A unique reference from the merchant system. It is set per operation to ensure an exactly-once delivery of a transactional operation. See payeeReference for details.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.OrderReference">
+            <summary>
+            The order reference should reflect the order reference found in the merchant’s systems.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.Amount">
+            <summary>
+            The transaction amount (including VAT, if any).
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.Tokens">
+            <summary>
+            A list of tokens connected to the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ICancelledResponse.Details">
+            <summary>
+            Details connected to the payment.
+            </summary>
+        </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.ICurrentPayment">
             <summary>
             Transactional details about a current payment in a payment order.
@@ -6855,6 +7050,191 @@
             Current payment object, contains detailed information.
             </summary>
         </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptItem">
+            <summary>
+            The failed attempt object.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptItem.Created">
+            <summary>
+            The ISO-8601 date of when the payment order was created.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptItem.Instrument">
+            <summary>
+            Payment instrument used in the failed payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptItem.Number">
+            <summary>
+            The transaction number, useful when there’s need to reference the transaction in human communication
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptItem.Status">
+            <summary>
+            The status of the payment attempt. Failed or Aborted.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptItem.Problem">
+            <summary>
+            The problem object.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptsResponse">
+            <summary>
+            The failed attempt response.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptsResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedAttemptsResponse.FailedAttemptList">
+            <summary>
+            List of failed attempts.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IFailedResponse">
+            <summary>
+            The failed object.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFailedResponse.Problem">
+            <summary>
+            The problem object.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem">
+            <summary>
+            The financial transactions object.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Id">
+            <summary>
+            The id of the financial transaction.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Created">
+            <summary>
+            The ISO-8601 date of when the payment order was created.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Updated">
+            <summary>
+            The ISO-8601 date of when the payment order was updated.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Type">
+            <summary>
+            The type of transaction. Capture, Authorization, Cancellation, Reversal, Sale.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Number">
+            <summary>
+            The transaction number, useful when there’s need to reference the transaction in human communication. Not usable for programmatic identification of the transaction, where id should be used instead.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Amount">
+            <summary>
+            The transaction amount (including VAT, if any)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.VatAmount">
+            <summary>
+            The payment’s VAT (Value Added Tax)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.Description">
+            <summary>
+            The description of the payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.PayeeReference">
+            <summary>
+            A unique reference from the merchant system. It is set per operation to ensure an exactly-once delivery of a transactional operation
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.ReceiptReference">
+            <summary>
+            A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionItem.OrderItems">
+            <summary>
+            The array of items being purchased with the order. Note that authorization orderItems will not be printed on invoices, so lines meant for print must be added in the Capture request.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionsResponse">
+            <summary>
+            Information about the financial transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionsResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IFinancialTransactionsResponse.FinancialTransactionList">
+            <summary>
+            The financial transactions object.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem">
+            <summary>
+            The history object.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem.Created">
+            <summary>
+            The ISO-8601 date of when the history event was created.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem.Name">
+            <summary>
+            Name of the history event. See list below for information.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem.Instrument">
+            <summary>
+            The payment instrument used when the event occurred.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem.Number">
+            <summary>
+            Payment number associated with the event.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem.Prefill">
+            <summary>
+            Indicates if payment info was prefilled or not.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryListItem.InitiatedBy">
+            <summary>
+            Consumer, Merchant or System. The party that initiated the event.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IHistoryResponse">
+            <summary>
+            The history object.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IHistoryResponse.HistoryList">
+            <summary>
+            The array of history objects.
+            </summary>
+        </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.Invoice">
             <summary>
             Transactional details about a invoice payment.
@@ -6864,6 +7244,46 @@
         <member name="P:SwedbankPay.Sdk.PaymentOrders.Invoice.FeeAmount">
             <summary>
                 The fee amount in the lowest monetary unit to apply if the consumer chooses to pay with invoice.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.IPaidResponse">
+            <summary>
+            Information about the paid transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.Id">
+            <summary>
+            The relative URL and unique identifier
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.Instrument">
+            <summary>
+            Payment instrument used in the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.Number">
+            <summary>
+            The transaction number , useful when there’s need to reference the transaction in human communication.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.PayeeReference">
+            <summary>
+            	A unique reference from the merchant system. It is set per operation to ensure an exactly-once delivery of a transactional operation
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.OrderReference">
+            <summary>
+            The order reference should reflect the order reference found in the merchant’s systems.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.Amount">
+            <summary>
+            The transaction amount (including VAT, if any)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaidResponse.Tokens">
+            <summary>
+            A list of tokens connected to the payment.
             </summary>
         </member>
         <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentAuthorizationListResponse.Id">
@@ -6934,163 +7354,6 @@
             In Invoice Payments payeeReference is used as an invoice/receipt number, if the receiptReference is not defined.
             </summary>
         </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder">
-            <summary>
-            Detailed information about a payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Amount">
-            <summary>
-            The amount (including VAT, if any) to charge the payer,
-            entered in the lowest monetary unit of the selected currency.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Created">
-            <summary>
-            The <seealso cref="T:System.DateTime"/> the payment order was created.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Currency">
-            <summary>
-            The selected currency for this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.CurrentPayment">
-            <summary>
-            Resource where information about the current – and sole active – payment can be retrieved.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Description">
-            <summary>
-            A 40 character length textual description of the purchase.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Language">
-            <summary>
-            Payers prefered language.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Metadata">
-            <summary>
-            Metadata can be used to store data associated to a payment order that can be retrieved later by performing a GET on the payment order.
-            Swedbank Pay does not use or process metadata,
-            it is only stored on the payment order so it can be retrieved later alongside the payment order.
-            An example where metadata might be useful is when several internal systems are involved in the payment process and the payment creation is done in one system and post-purchases take place in another.
-            In order to transmit data between these two internal systems,
-            the data can be stored in metadata on the payment order so the internal systems do not need to communicate with each other directly.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Operation">
-            <summary>
-            The <see cref="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Operation"/> used to initate this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.OrderItems">
-            <summary>
-            Resource that gives access to the <seealso cref="T:SwedbankPay.Sdk.IOrderItem"/>s this payment order contains.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.PayeeInfo">
-            <summary>
-            Identifies the merchant that initiated the payment.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Payers">
-            <summary>
-            Resource where information about the payee of the payment order can be retrieved.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Payments">
-            <summary>
-            Resource where information about all underlying payments can be retrieved.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.RemainingCancelAmount">
-            <summary>
-            The available <seealso cref="T:SwedbankPay.Sdk.Amount"/> to cancel.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.RemainingCaptureAmount">
-            <summary>
-            The available <seealso cref="T:SwedbankPay.Sdk.Amount"/> to capture.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.RemainingReversalAmount">
-            <summary>
-            The available <seealso cref="T:SwedbankPay.Sdk.Amount"/> to reverse.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Settings">
-            <summary>
-            For admin users gives detailed information about current settings.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.State">
-            <summary>
-            Indicates the state of the payment order.
-            Does not reflect the state of any ongoing payments initiated from the payment order.
-            This field is only for status display purposes.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Updated">
-            <summary>
-            The <seealso cref="T:System.DateTime"/> this payment order was last updated.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.Urls">
-            <summary>
-            Resource where all URIs related to the payment order can be retrieved.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.UserAgent">
-            <summary>
-            The user agent string of the payer’s browser.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrder.VatAmount">
-            <summary>
-            The payment’s VAT (Value Added Tax) amount, entered in the lowest monetary unit of the selected currency.
-            The vatAmount entered will not affect the amount shown on the payment page, which only shows the total amount.
-            This field is used to specify how much ofthe total amount the VAT will be.
-            Set to 0 (zero) if there is no VAT amount charged.
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations">
-            <summary>
-            Mapps the currently known operations in payment order to easily
-            accessable methods.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations.Abort">
-            <summary>
-            Aborts the payment order, if available.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations.Cancel">
-            <summary>
-            Cancels the payment order, if available.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations.Capture">
-            <summary>
-            Captures the authorized <seealso cref="T:SwedbankPay.Sdk.Amount"/> on the payment order, if available.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations.Reverse">
-            <summary>
-            Reverses previously captured <seealso cref="T:SwedbankPay.Sdk.Amount"/> on the payment order, if available.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations.Update">
-            <summary>
-            Updates the contents of the payment order, if available.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderOperations.View">
-            <summary>
-            Returns details needed to created a hosted view for the payer to see the payment order, if available.
-            </summary>
-        </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderPayeeInfo">
             <summary>
             <inheritdoc/>
@@ -7104,49 +7367,6 @@
         <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderPayeeInfo.CorporationName">
             <summary>
             The Corporation name for the Payee
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.IPaymentOrdersResource">
-            <summary>
-            Entrypoint to our PaymentOrders API resource.
-            </summary>
-        </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.IPaymentOrdersResource.Create(SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequest,SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand)">
-            <summary>
-                Creates a payment order
-            </summary>
-            <param name="paymentOrderRequest"></param>
-            <param name="paymentOrderExpand"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-            <exception cref="T:System.InvalidOperationException"></exception>
-            <exception cref="T:System.Net.Http.HttpRequestException"></exception>
-            <returns></returns>
-        </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.IPaymentOrdersResource.Get(System.Uri,SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand)">
-            <summary>
-                Get payment order for the given id
-            </summary>
-            <param name="id"></param>
-            <param name="paymentOrderExpand"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-            <exception cref="T:System.InvalidOperationException"></exception>
-            <exception cref="T:System.Net.Http.HttpRequestException"></exception>
-            <returns></returns>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderResponse">
-            <summary>
-            API response giving access to the current payment
-            order and available operations.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderResponse.Operations">
-            <summary>
-            Currently available operations of this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.IPaymentOrderResponse.PaymentOrder">
-            <summary>
-            The current payment order.
             </summary>
         </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.ISaleListItem">
@@ -7226,6 +7446,31 @@
             Contains all currently available sale list items for this payment order.
             </summary>
         </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.ITokenItem">
+            <summary>
+             Token connected to the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ITokenItem.Type">
+            <summary>
+            The different types of available tokens.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ITokenItem.Token">
+            <summary>
+            The token guid.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ITokenItem.Name">
+            <summary>
+            The name of the token.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.ITokenItem.ExpiryDate">
+            <summary>
+            The expiry date of the token.
+            </summary>
+        </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.NationalIdentifier">
             <summary>
             Identifies a consumer with country and social security number.
@@ -7266,136 +7511,6 @@
                 to print on invoices if
                 the payer chooses to pay with invoice, among other things. Order items can be specified on both payment order
                 creation as well as on Capture.
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.Payer">
-            <summary>
-            Detailed information about a payer for a payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.AccountInfo">
-            <summary>
-            Account information about the payer if such is known by the merchant system.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.BillingAddress">
-            <summary>
-            Payers billing address for this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.ConsumerProfileRef">
-            <summary>
-                The consumer profile reference as obtained through the Consumers API.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.Email">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.FirstName">
-            <summary>
-                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
-                companyName.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.HomePhoneNumber">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.LastName">
-            <summary>
-                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
-                companyName.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.Msisdn">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.NationalIdentifier">
-            <summary>
-                Required when merchant onboards consumer.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.ShippingAddress">
-            <summary>
-            Payers shipping address for this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.Payer.WorkPhoneNumber">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.PayerResponse">
-            <summary>
-            Resource to access the Payer information on a payment order.
-            </summary>
-        </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PayerResponse.#ctor(System.Uri)">
-            <summary>
-            Instantiates a <see cref="T:SwedbankPay.Sdk.PaymentOrders.PayerResponse"/> with the provided <paramref name="id"/>.
-            </summary>
-            <param name="id"></param>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.AccountInfo">
-            <summary>
-            Account information about the payer if such is known by the merchant system.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.BillingAddress">
-            <summary>
-            Payers billing address for this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.ConsumerProfileRef">
-            <summary>
-                The consumer profile reference as obtained through the Consumers API.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.Email">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.FirstName">
-            <summary>
-                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
-                companyName.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.HomePhoneNumber">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.LastName">
-            <summary>
-                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
-                companyName.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.Msisdn">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.NationalIdentifier">
-            <summary>
-                Required when merchant onboards consumer.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.ShippingAddress">
-            <summary>
-            Payers shipping address for this payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PayerResponse.WorkPhoneNumber">
-            <summary>
-                Optional (increases chance for challenge flow if not set)
             </summary>
         </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderAbortRequest">
@@ -7481,7 +7596,7 @@
             API request object for capturing funds for a payment order.
             </summary>
         </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureRequest.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String)">
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureRequest.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,System.String)">
             <summary>
             Instantiates a <see cref="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureRequest"/> with the provided parameters.
             </summary>
@@ -7489,6 +7604,7 @@
             <param name="vatAmount">The amount of funds to capture as value added taxes.</param>
             <param name="description">A textual description of the capture.</param>
             <param name="payeeReference">Transactionally unique reference from the merchant system.</param>
+            <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
         </member>
         <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureRequest.Transaction">
             <summary>
@@ -7500,7 +7616,7 @@
             Transactional details for capturing funds for a payment order.
             </summary>
         </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureTransaction.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String)">
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureTransaction.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,System.String)">
             <summary>
             Instantiates a <see cref="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureTransaction"/> with the provided parameters.
             </summary>
@@ -7508,6 +7624,12 @@
             <param name="vatAmount">The amount of funds to capture as value added taxes.</param>
             <param name="description">A textual description of the capture.</param>
             <param name="payeeReference">Transactionally unique reference from the merchant system.</param>
+            <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureTransaction.ReceiptReference">
+            <summary>
+            A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.
+            </summary>
         </member>
         <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderCaptureTransaction.Amount">
             <summary>
@@ -7539,62 +7661,6 @@
             The vatAmount entered will not affect the amount shown on the payment page, which only shows the total amount.
             This field is used to specify how much ofthe total amount the VAT will be.
             Set to 0 (zero) if there is no VAT amount charged.
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand">
-            <summary>
-            Use to have sub-resources of a payment order be automatically expanded/filled
-            when using a GET request for a payment order.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.None">
-            <summary>
-            Don't expand any fields.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.Urls">
-            <summary>
-            Expand the Urls sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.PayeeInfo">
-            <summary>
-            Expand the PayeeInfo sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.Settings">
-            <summary>
-            Expand the Settings sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.Payers">
-            <summary>
-            Expand the Payers sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.OrderItems">
-            <summary>
-            Expand the OrderItems sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.Metadata">
-            <summary>
-            Expand the Metadata sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.Payments">
-            <summary>
-            Expand the Payments sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.CurrentPayment">
-            <summary>
-            Expand the CurrentPayment sub-reasource.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.All">
-            <summary>
-            Expand All sub-reasources.
             </summary>
         </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderLanguage">
@@ -7652,207 +7718,20 @@
             Object holding Swish specific options.
             </summary>
         </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequest">
-            <summary>
-            Request details for creating a payment order.
-            </summary>
-        </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequest.#ctor(SwedbankPay.Sdk.Operation,SwedbankPay.Sdk.Currency,SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,SwedbankPay.Sdk.Language,System.Boolean,SwedbankPay.Sdk.IUrls,SwedbankPay.Sdk.IPayeeInfo)">
-            <summary>
-            Request details for creating a payment order.
-            </summary>
-            <param name="operation">Initial API operation to perform.</param>
-            <param name="currency">The wanted currency for the payment.</param>
-            <param name="amount">The amount to pay in the payment.</param>
-            <param name="vatAmount">The amount to pay that is value added taxes.</param>
-            <param name="description">Textual description of the payment order.</param>
-            <param name="userAgent">The payers UserAgent string.</param>
-            <param name="language">The payers preferred <seealso cref="T:SwedbankPay.Sdk.Language"/>.</param>
-            <param name="generateRecurrenceToken">Set if you want a recurrence token for recur payments.</param>
-            <param name="urls">Object with URLs relevant for the payment.</param>
-            <param name="payeeInfo">Object with information about the Merchant.</param>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequest.PaymentOrder">
-            <summary>
-            Transactional details about the payment order.
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails">
-            <summary>
-            Transactional details for creating a payment order.
-            </summary>
-        </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.#ctor(SwedbankPay.Sdk.Operation,SwedbankPay.Sdk.Currency,SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,SwedbankPay.Sdk.Language,System.Boolean,SwedbankPay.Sdk.IUrls,SwedbankPay.Sdk.IPayeeInfo)">
-            <summary>
-            Request details for creating a payment order.
-            </summary>
-            <param name="operation">Initial API operation to perform.</param>
-            <param name="currency">The wanted currency for the payment.</param>
-            <param name="amount">The amount to pay in the payment.</param>
-            <param name="vatAmount">The amount to pay that is value added taxes.</param>
-            <param name="description">Textual description of the payment order.</param>
-            <param name="userAgent">The payers UserAgent string.</param>
-            <param name="language">The payers preferred language.</param>
-            <param name="generateRecurrenceToken">Set if you want a recurrence token for recur payments.</param>
-            <param name="urls">Object with URLs relevant for the payment.</param>
-            <param name="payeeInfo">Object with information about the Merchant.</param>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Amount">
-            <summary>
-                The amount including VAT in the lowest monetary unit of the currency. E.g. 10000 equals 100.00 NOK and 5000 equals
-                50.00 NOK.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Currency">
-            <summary>
-                The currency of the payment.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Description">
-            <summary>
-                The description of the payment order.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.GenerateRecurrenceToken">
-            <summary>
-                Determines if a recurrence token should be generated. A recurrence token is primarily used to enable future
-                recurring payments - with the same token - through server-to-server calls. Default value is false
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Items">
-            <summary>
-                The array of items that will affect how the payment is performed.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Language">
-            <summary>
-                The language of the payer.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Metadata">
-            <summary>
-                The keys and values that should be associated with the payment order. Can be additional identifiers and data you
-                want to associate with the payment.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Operation">
-            <summary>
-                The operation that the payment order is supposed to perform.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.OrderItems">
-            <summary>
-                The array of items being purchased with the order. Used to print on invoices if the payer chooses to pay with
-                invoice, among other things.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.PayeeInfo">
-            <summary>
-                Information about the payee of the payment order
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Payer">
-            <summary>
-                Information about the payee of the payment order
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.RiskIndicator">
-            <summary>
-            Information about risk indicator
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.Urls">
-            <summary>
-                The urls property of the paymentOrder contains the URIs related to a payment order, including where the consumer
-                gets redirected when going forward
-                with or cancelling a payment session, as well as the callback URI that is used to inform the payee (merchant) of
-                changes or updates made to underlying payments or transaction.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.UserAgent">
-            <summary>
-                The user agent of the payer.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.VatAmount">
-            <summary>
-                The amount of VAT in the lowest monetary unit of the currency. E.g. 10000 equals 100.00 NOK and 5000 equals 50.00
-                NOK.
-            </summary>
-        </member>
-        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderRequestDetails.DisablePaymentMenu">
-            <summary>
-            If set to true, disables the frame around the payment menu. Usefull when only showing one payment instrument.
-            </summary>
-        </member>
-        <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations">
-            <summary>
-            Known operations for PaymentOrder.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.AbortedPaymentOrder">
-            <summary>
-            Gets a aborted payment order.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.CreatePaymentOrderCancel">
-            <summary>
-            Creates a cancellation for a payment order.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.CreatePaymentOrderCapture">
-            <summary>
-            Creates a capture for the payment order.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.CreatePaymentOrderReversal">
-            <summary>
-            Creates a reversal for the payment order.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.PaidPaymentOrder">
-            <summary>
-            Gets a payment order that is paid.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.RedirectPaymentOrder">
-            <summary>
-            Operation for redirecting payer.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.RedirectVerification">
-            <summary>
-            Operation for redirecting a payer for verification.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.UpdatePaymentOrderAbort">
-            <summary>
-            Operation to update the payment order to aborted state.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.UpdatePaymentOrderUpdateOrder">
-            <summary>
-            Operation for updating the payment order.
-            </summary>
-        </member>
-        <member name="F:SwedbankPay.Sdk.PaymentOrders.PaymentOrderResourceOperations.ViewPaymentOrder">
-            <summary>
-            Operation to view the payment order in a iframe.
-            </summary>
-        </member>
         <member name="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalRequest">
             <summary>
             API request to reverse captured funds.
             </summary>
         </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalRequest.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String)">
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalRequest.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,System.String)">
             <summary>
-            Instantaites a <see cref="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalRequest"/> with the provided parameters.
+            Instantiates a <see cref="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalRequest"/> with the provided parameters.
             </summary>
             <param name="amount">The amount to refund to the payer.</param>
             <param name="vatAmount">The amount of VAT to refund.</param>
             <param name="description">Textual description of the reversal.</param>
             <param name="payeeReference">Unique ID set by the merchant for this transaction.</param>
+            <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
         </member>
         <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalRequest.Transaction">
             <summary>
@@ -7864,7 +7743,7 @@
             Reverses captured funds back to the payer.
             </summary>
         </member>
-        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalTransaction.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String)">
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalTransaction.#ctor(SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,System.String)">
             <summary>
             Instantaites a <see cref="T:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalTransaction"/> with the provided parameters.
             </summary>
@@ -7872,6 +7751,12 @@
             <param name="vatAmount">The amount of VAT to refund.</param>
             <param name="description">Textual description of the reversal.</param>
             <param name="payeeReference">Unique ID set by the merchant for this transaction.</param>
+            <param name="receiptReference">A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.</param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalTransaction.ReceiptReference">
+            <summary>
+            A unique reference from the merchant system. It is used to supplement payeeReference as an additional receipt number.
+            </summary>
         </member>
         <member name="P:SwedbankPay.Sdk.PaymentOrders.PaymentOrderReversalTransaction.Amount">
             <summary>
@@ -7959,6 +7844,1147 @@
         <member name="P:SwedbankPay.Sdk.PaymentOrders.Swish.EnableEcomOnly">
             <summary>
              Set enable Swish on ecommerce transactions.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.Swish.PaymentRestrictedToAgeLimit">
+            <summary>
+            Positive number that sets the required age needed to fulfill the payment. To use this feature it has to be configured in the contract.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.Swish.PaymentRestrictedToSocialSecurityNumber">
+            <summary>
+            When provided, the payment will be restricted to a specific social security number to make sure its the same logged in customer who is also the payer. Format: yyyyMMddxxxx. To use this feature it has to be configured in the contract.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder">
+            <summary>
+            Detailed information about a payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Amount">
+            <summary>
+            The amount (including VAT, if any) to charge the payer,
+            entered in the lowest monetary unit of the selected currency.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Created">
+            <summary>
+            The <seealso cref="T:System.DateTime"/> the payment order was created.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Currency">
+            <summary>
+            The selected currency for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.CurrentPayment">
+            <summary>
+            Resource where information about the current – and sole active – payment can be retrieved.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Description">
+            <summary>
+            A 40 character length textual description of the purchase.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Language">
+            <summary>
+            Payers preferred language.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Metadata">
+            <summary>
+            Metadata can be used to store data associated to a payment order that can be retrieved later by performing a GET on the payment order.
+            Swedbank Pay does not use or process metadata,
+            it is only stored on the payment order so it can be retrieved later alongside the payment order.
+            An example where metadata might be useful is when several internal systems are involved in the payment process and the payment creation is done in one system and post-purchases take place in another.
+            In order to transmit data between these two internal systems,
+            the data can be stored in metadata on the payment order so the internal systems do not need to communicate with each other directly.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Operation">
+            <summary>
+            The <see cref="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Operation"/> used to initiate this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.OrderItems">
+            <summary>
+            Resource that gives access to the <seealso cref="T:SwedbankPay.Sdk.IOrderItem"/>s this payment order contains.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.PayeeInfo">
+            <summary>
+            Identifies the merchant that initiated the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Payers">
+            <summary>
+            Resource where information about the payee of the payment order can be retrieved.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Payments">
+            <summary>
+            Resource where information about all underlying payments can be retrieved.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.RemainingCancelAmount">
+            <summary>
+            The available <seealso cref="T:SwedbankPay.Sdk.Amount"/> to cancel.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.RemainingCaptureAmount">
+            <summary>
+            The available <seealso cref="T:SwedbankPay.Sdk.Amount"/> to capture.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.RemainingReversalAmount">
+            <summary>
+            The available <seealso cref="T:SwedbankPay.Sdk.Amount"/> to reverse.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Settings">
+            <summary>
+            For admin users gives detailed information about current settings.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.State">
+            <summary>
+            Indicates the state of the payment order.
+            Does not reflect the state of any ongoing payments initiated from the payment order.
+            This field is only for status display purposes.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Updated">
+            <summary>
+            The <seealso cref="T:System.DateTime"/> this payment order was last updated.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.Urls">
+            <summary>
+            Resource where all URIs related to the payment order can be retrieved.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.UserAgent">
+            <summary>
+            The user agent string of the payer’s browser.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.VatAmount">
+            <summary>
+            The payment’s VAT (Value Added Tax) amount, entered in the lowest monetary unit of the selected currency.
+            The vatAmount entered will not affect the amount shown on the payment page, which only shows the total amount.
+            This field is used to specify how much ofthe total amount the VAT will be.
+            Set to 0 (zero) if there is no VAT amount charged.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrder.InitiatingSystemUserAgent">
+            <summary>
+            The user agent of the HTTP client making the request, reflecting the value sent in the User-Agent header with the initial POST request which created the Payment Order.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations">
+            <summary>
+            Mapps the currently known operations in payment order to easily
+            accessable methods.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations.Abort">
+            <summary>
+            Aborts the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations.Cancel">
+            <summary>
+            Cancels the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations.Capture">
+            <summary>
+            Captures the authorized <seealso cref="T:SwedbankPay.Sdk.Amount"/> on the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations.Reverse">
+            <summary>
+            Reverses previously captured <seealso cref="T:SwedbankPay.Sdk.Amount"/> on the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations.Update">
+            <summary>
+            Updates the contents of the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderOperations.View">
+            <summary>
+            Returns details needed to created a hosted view for the payer to see the payment order, if available.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrdersResource">
+            <summary>
+            Entrypoint to our PaymentOrders API resource.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrdersResource.Create(SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequest,SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand)">
+            <summary>
+                Creates a payment order
+            </summary>
+            <param name="paymentOrderRequest"></param>
+            <param name="paymentOrderExpand"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.Net.Http.HttpRequestException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrdersResource.Get(System.Uri,SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand)">
+            <summary>
+                Get payment order for the given id
+            </summary>
+            <param name="id"></param>
+            <param name="paymentOrderExpand"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.Net.Http.HttpRequestException"></exception>
+            <returns></returns>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderResponse">
+            <summary>
+            API response giving access to the current payment
+            order and available operations.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderResponse.Operations">
+            <summary>
+            Currently available operations of this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.IPaymentOrderResponse.PaymentOrder">
+            <summary>
+            The current payment order.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.Payer">
+            <summary>
+            Detailed information about a payer for a payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.AccountInfo">
+            <summary>
+            Account information about the payer if such is known by the merchant system.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.BillingAddress">
+            <summary>
+            Payers billing address for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.ConsumerProfileRef">
+            <summary>
+                The consumer profile reference as obtained through the Consumers API.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.Email">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.FirstName">
+            <summary>
+                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
+                companyName.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.HomePhoneNumber">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.LastName">
+            <summary>
+                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
+                companyName.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.Msisdn">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.NationalIdentifier">
+            <summary>
+                Required when merchant onboards consumer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.ShippingAddress">
+            <summary>
+            Payers shipping address for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.Payer.WorkPhoneNumber">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse">
+            <summary>
+            Resource to access the Payer information on a payment order.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.#ctor(System.Uri)">
+            <summary>
+            Instantiates a <see cref="T:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse"/> with the provided <paramref name="id"/>.
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.AccountInfo">
+            <summary>
+            Account information about the payer if such is known by the merchant system.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.BillingAddress">
+            <summary>
+            Payers billing address for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.ConsumerProfileRef">
+            <summary>
+                The consumer profile reference as obtained through the Consumers API.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.Email">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.FirstName">
+            <summary>
+                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
+                companyName.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.HomePhoneNumber">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.LastName">
+            <summary>
+                Optional (increases chance for challenge flow if not set) If buyer is a company, use only firstName for
+                companyName.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.Msisdn">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.NationalIdentifier">
+            <summary>
+                Required when merchant onboards consumer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.ShippingAddress">
+            <summary>
+            Payers shipping address for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PayerResponse.WorkPhoneNumber">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand">
+            <summary>
+            Use to have sub-resources of a payment order be automatically expanded/filled
+            when using a GET request for a payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.None">
+            <summary>
+            Don't expand any fields.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.Urls">
+            <summary>
+            Expand the Urls sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.PayeeInfo">
+            <summary>
+            Expand the PayeeInfo sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.Settings">
+            <summary>
+            Expand the Settings sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.Payers">
+            <summary>
+            Expand the Payers sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.OrderItems">
+            <summary>
+            Expand the OrderItems sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.Metadata">
+            <summary>
+            Expand the Metadata sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.Payments">
+            <summary>
+            Expand the Payments sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.CurrentPayment">
+            <summary>
+            Expand the CurrentPayment sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.All">
+            <summary>
+            Expand All sub-reasources.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequest">
+            <summary>
+            Request details for creating a payment order.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequest.#ctor(SwedbankPay.Sdk.Operation,SwedbankPay.Sdk.Currency,SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,SwedbankPay.Sdk.Language,System.Boolean,SwedbankPay.Sdk.IUrls,SwedbankPay.Sdk.IPayeeInfo)">
+            <summary>
+            Request details for creating a payment order.
+            </summary>
+            <param name="operation">Initial API operation to perform.</param>
+            <param name="currency">The wanted currency for the payment.</param>
+            <param name="amount">The amount to pay in the payment.</param>
+            <param name="vatAmount">The amount to pay that is value added taxes.</param>
+            <param name="description">Textual description of the payment order.</param>
+            <param name="userAgent">The payers UserAgent string.</param>
+            <param name="language">The payers preferred <seealso cref="T:SwedbankPay.Sdk.Language"/>.</param>
+            <param name="generateRecurrenceToken">Set if you want a recurrence token for recur payments.</param>
+            <param name="urls">Object with URLs relevant for the payment.</param>
+            <param name="payeeInfo">Object with information about the Merchant.</param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequest.PaymentOrder">
+            <summary>
+            Transactional details about the payment order.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails">
+            <summary>
+            Transactional details for creating a payment order.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.#ctor(SwedbankPay.Sdk.Operation,SwedbankPay.Sdk.Currency,SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,SwedbankPay.Sdk.Language,System.Boolean,SwedbankPay.Sdk.IUrls,SwedbankPay.Sdk.IPayeeInfo)">
+            <summary>
+            Request details for creating a payment order.
+            </summary>
+            <param name="operation">Initial API operation to perform.</param>
+            <param name="currency">The wanted currency for the payment.</param>
+            <param name="amount">The amount to pay in the payment.</param>
+            <param name="vatAmount">The amount to pay that is value added taxes.</param>
+            <param name="description">Textual description of the payment order.</param>
+            <param name="userAgent">The payers UserAgent string.</param>
+            <param name="language">The payers preferred language.</param>
+            <param name="generateRecurrenceToken">Set if you want a recurrence token for recur payments.</param>
+            <param name="urls">Object with URLs relevant for the payment.</param>
+            <param name="payeeInfo">Object with information about the Merchant.</param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Amount">
+            <summary>
+                The amount including VAT in the lowest monetary unit of the currency. E.g. 10000 equals 100.00 NOK and 5000 equals
+                50.00 NOK.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Currency">
+            <summary>
+                The currency of the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Description">
+            <summary>
+                The description of the payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.GenerateRecurrenceToken">
+            <summary>
+                Determines if a recurrence token should be generated. A recurrence token is primarily used to enable future
+                recurring payments - with the same token - through server-to-server calls. Default value is false
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Items">
+            <summary>
+                The array of items that will affect how the payment is performed.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Language">
+            <summary>
+                The language of the payer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Metadata">
+            <summary>
+                The keys and values that should be associated with the payment order. Can be additional identifiers and data you
+                want to associate with the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Operation">
+            <summary>
+                The operation that the payment order is supposed to perform.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.OrderItems">
+            <summary>
+                The array of items being purchased with the order. Used to print on invoices if the payer chooses to pay with
+                invoice, among other things.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.PayeeInfo">
+            <summary>
+                Information about the payee of the payment order
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Payer">
+            <summary>
+                Information about the payee of the payment order
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.RiskIndicator">
+            <summary>
+            Information about risk indicator
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.Urls">
+            <summary>
+                The urls property of the paymentOrder contains the URIs related to a payment order, including where the consumer
+                gets redirected when going forward
+                with or cancelling a payment session, as well as the callback URI that is used to inform the payee (merchant) of
+                changes or updates made to underlying payments or transaction.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.UserAgent">
+            <summary>
+                The user agent of the payer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.VatAmount">
+            <summary>
+                The amount of VAT in the lowest monetary unit of the currency. E.g. 10000 equals 100.00 NOK and 5000 equals 50.00
+                NOK.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderRequestDetails.DisablePaymentMenu">
+            <summary>
+            If set to true, disables the frame around the payment menu. Usefull when only showing one payment instrument.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations">
+            <summary>
+            Known operations for PaymentOrder.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.AbortedPaymentOrder">
+            <summary>
+            Gets a aborted payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.CreatePaymentOrderCancel">
+            <summary>
+            Creates a cancellation for a payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.CreatePaymentOrderCapture">
+            <summary>
+            Creates a capture for the payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.CreatePaymentOrderReversal">
+            <summary>
+            Creates a reversal for the payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.PaidPaymentOrder">
+            <summary>
+            Gets a payment order that is paid.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.RedirectPaymentOrder">
+            <summary>
+            Operation for redirecting payer.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.RedirectVerification">
+            <summary>
+            Operation for redirecting a payer for verification.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.UpdatePaymentOrderAbort">
+            <summary>
+            Operation to update the payment order to aborted state.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.UpdatePaymentOrderUpdateOrder">
+            <summary>
+            Operation for updating the payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderResourceOperations.ViewPaymentOrder">
+            <summary>
+            Operation to view the payment order in a iframe.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder">
+            <summary>
+            Detailed information about a payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Created">
+            <summary>
+            The <seealso cref="T:System.DateTime"/> the payment order was created.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Updated">
+            <summary>
+            The <seealso cref="T:System.DateTime"/> this payment order was last updated.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Operation">
+            <summary>
+            The <see cref="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Operation"/> used to initiate this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Status">
+            <summary>
+            Indicates the payment order’s current status.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Currency">
+            <summary>
+            The selected currency for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Amount">
+            <summary>
+            The amount (including VAT, if any) to charge the payer,
+            entered in the lowest monetary unit of the selected currency.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.VatAmount">
+            <summary>
+            The payment’s VAT (Value Added Tax) amount, entered in the lowest monetary unit of the selected currency.
+            The vatAmount entered will not affect the amount shown on the payment page, which only shows the total amount.
+            This field is used to specify how much of the total amount the VAT will be.
+            Set to 0 (zero) if there is no VAT amount charged.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Description">
+            <summary>
+            A 40 character length textual description of the purchase.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.InitiatingSystemUserAgent">
+            <summary>
+            The user agent of the HTTP client making the request, reflecting the value sent in the User-Agent header with the initial POST request which created the Payment Order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Language">
+            <summary>
+            Payers preferred language.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.AvailableInstruments">
+            <summary>
+            A list of instruments available for this payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Implementation">
+            <summary>
+            The merchant’s Checkout v3 implementation type. Business, Enterprise, PaymentsOnly or Starter. We ask that you don’t build logic around this field’s response. It is mainly for information purposes
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Integration">
+            <summary>
+            The merchant’s Checkout v3 integration type. HostedView (Seamless View) or Redirect. We ask that you don’t build logic around this field’s response.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.InstrumentMode">
+            <summary>
+            Set to true or false. Indicates if the payment is initialized with only one payment instrument available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.GuestMode">
+            <summary>
+            Set to true or false. Indicates if the payer chose to pay as a guest or not. When using the Payments Only implementation, this is triggered by not including a payerReference in the original paymentOrder request.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.OrderItems">
+            <summary>
+            Resource that gives access to the <seealso cref="T:SwedbankPay.Sdk.IOrderItem"/>s this payment order contains.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Urls">
+            <summary>
+            Resource where all URIs related to the payment order can be retrieved.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.PayeeInfo">
+            <summary>
+            Identifies the merchant that initiated the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Payer">
+            <summary>
+            Resource where information about the payee of the payment order can be retrieved.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.History">
+            <summary>
+            Information about the payment’s history
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Failed">
+            <summary>
+            Information about the failed transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Aborted">
+            <summary>
+            Information about the aborted transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Paid">
+            <summary>
+            Information about the paid transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Cancelled">
+            <summary>
+            Information about the cancelled transactions
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.FinancialTransactions">
+            <summary>
+            Information about the financial transactions 
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.FailedAttempts">
+            <summary>
+            Information about the failed attempts
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrder.Metadata">
+            <summary>
+            Metadata can be used to store data associated to a payment order that can be retrieved later by performing a GET on the payment order.
+            Swedbank Pay does not use or process metadata,
+            it is only stored on the payment order so it can be retrieved later alongside the payment order.
+            An example where metadata might be useful is when several internal systems are involved in the payment process and the payment creation is done in one system and post-purchases take place in another.
+            In order to transmit data between these two internal systems,
+            the data can be stored in metadata on the payment order so the internal systems do not need to communicate with each other directly.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations">
+            <summary>
+            Mapps the currently known operations in payment order to easily
+            accessable methods.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.Abort">
+            <summary>
+            Aborts the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.Cancel">
+            <summary>
+            Cancels the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.Capture">
+            <summary>
+            Captures the authorized <seealso cref="T:SwedbankPay.Sdk.Amount"/> on the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.Reverse">
+            <summary>
+            Reverses previously captured <seealso cref="T:SwedbankPay.Sdk.Amount"/> on the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.Update">
+            <summary>
+            Updates the contents of the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.View">
+            <summary>
+            Returns details needed to created a hosted view for the payer to see the payment order, if available.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderOperations.Redirect">
+            <summary>
+            Contains the URL used to redirect the payer to the Swedbank Pay Payments containing the Payment Menu.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderResponse">
+            <summary>
+            API response giving access to the current payment
+            order and available operations.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderResponse.Operations">
+            <summary>
+            Currently available operations of this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrderResponse.PaymentOrder">
+            <summary>
+            The current payment order.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrdersResource">
+            <summary>
+            Entrypoint to our PaymentOrders API resource.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrdersResource.Create(SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequest,SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand)">
+            <summary>
+                Creates a payment order
+            </summary>
+            <param name="paymentOrderRequest"></param>
+            <param name="paymentOrderExpand"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.Net.Http.HttpRequestException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V3.IPaymentOrdersResource.Get(System.Uri,SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand)">
+            <summary>
+                Get payment order for the given id
+            </summary>
+            <param name="id"></param>
+            <param name="paymentOrderExpand"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.Net.Http.HttpRequestException"></exception>
+            <returns></returns>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.Payer">
+            <summary>
+            Detailed information about a payer for a payment order.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V3.Payer.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.DigitalProducts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.FirstName">
+            <summary>
+                The first name of the payer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.LastName">
+            <summary>
+                The last name of the payer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.Email">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.Msisdn">
+            <summary>
+                Optional (increases chance for challenge flow if not set)
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.PayerReference">
+            <summary>
+            A reference used in the Enterprise and Payments Only implementations to recognize the payer when no SSN is stored.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.ShippingAddress">
+            <summary>
+            Payers shipping address for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.BillingAddress">
+            <summary>
+            Payers billing address for this payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.Payer.AccountInfo">
+            <summary>
+            Account information about the payer if such is known by the merchant system.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand">
+            <summary>
+            Use to have sub-resources of a payment order be automatically expanded/filled
+            when using a GET request for a payment order.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.None">
+            <summary>
+            Don't expand any fields.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Urls">
+            <summary>
+            Expand the Urls sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.PayeeInfo">
+            <summary>
+            Expand the PayeeInfo sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Payer">
+            <summary>
+            Expand the Payer sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.History">
+            <summary>
+            Expand the History sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Failed">
+            <summary>
+            Expand the Failed sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Aborted">
+            <summary>
+            Expand the Aborted sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Paid">
+            <summary>
+            Expand the Paid sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Cancelled">
+            <summary>
+            Expand the Cancelled sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.FinancialTransactions">
+            <summary>
+            Expand the FinancialTransactions sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.FailedAttempts">
+            <summary>
+            Expand the FailedAttempts sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.Metadata">
+            <summary>
+            Expand the Metadata sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.OrderItems">
+            <summary>
+            Expand the OrderItems sub-reasource.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderExpand.All">
+            <summary>
+            Expand All sub-reasources.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequest">
+            <summary>
+            Request details for creating a payment order.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequest.#ctor(SwedbankPay.Sdk.Operation,SwedbankPay.Sdk.Currency,SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,SwedbankPay.Sdk.Language,System.Boolean,System.Boolean,System.String,SwedbankPay.Sdk.IUrls,SwedbankPay.Sdk.IPayeeInfo)">
+            <summary>
+            Request details for creating a payment order.
+            </summary>
+            <param name="operation">Initial API operation to perform.</param>
+            <param name="currency">The wanted currency for the payment.</param>
+            <param name="amount">The amount to pay in the payment.</param>
+            <param name="vatAmount">The amount to pay that is value added taxes.</param>
+            <param name="description">Textual description of the payment order.</param>
+            <param name="userAgent">The payers UserAgent string.</param>
+            <param name="language">The payers preferred <seealso cref="T:SwedbankPay.Sdk.Language"/>.</param>
+            <param name="requestDeliveryInfo">Set to true if you want Swedbank Pay to return delivery information from the payment instruments which support this. The delivery information will then be displayed as the shippingAddress.</param>
+            <param name="restrictedToDeliveryInfoInstruments">Set to true if you want to restrict your payment menu to only include payment instruments which return delivery info.</param>
+            <param name="productName">Used to tag the payment as Checkout v3. Mandatory for Checkout v3, as you won’t get the operations in the response without submitting this field.</param>
+            <param name="urls">Object with URLs relevant for the payment.</param>
+            <param name="payeeInfo">Object with information about the Merchant.</param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequest.PaymentOrder">
+            <summary>
+            Transactional details about the payment order.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails">
+            <summary>
+            Transactional details for creating a payment order.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.#ctor(SwedbankPay.Sdk.Operation,SwedbankPay.Sdk.Currency,SwedbankPay.Sdk.Amount,SwedbankPay.Sdk.Amount,System.String,System.String,SwedbankPay.Sdk.Language,System.Boolean,System.Boolean,System.String,SwedbankPay.Sdk.IUrls,SwedbankPay.Sdk.IPayeeInfo)">
+            <summary>
+            Request details for creating a payment order.
+            </summary>
+            <param name="operation">Initial API operation to perform.</param>
+            <param name="currency">The wanted currency for the payment.</param>
+            <param name="amount">The amount to pay in the payment.</param>
+            <param name="vatAmount">The amount to pay that is value added taxes.</param>
+            <param name="description">Textual description of the payment order.</param>
+            <param name="userAgent">The payers UserAgent string.</param>
+            <param name="language">The payers preferred language.</param>
+            <param name="requestDeliveryInfo">Set to true if you want Swedbank Pay to return delivery information from the payment instruments which support this. The delivery information will then be displayed as the shippingAddress.</param>
+            <param name="restrictedToDeliveryInfoInstruments">Set to true if you want to restrict your payment menu to only include payment instruments which return delivery info.</param>
+            <param name="productName">Used to tag the payment as Checkout v3. Mandatory for Checkout v3, as you won’t get the operations in the response without submitting this field.</param>
+            <param name="urls">Object with URLs relevant for the payment.</param>
+            <param name="payeeInfo">Object with information about the Merchant.</param>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Amount">
+            <summary>
+                The amount including VAT in the lowest monetary unit of the currency. E.g. 10000 equals 100.00 NOK and 5000 equals
+                50.00 NOK.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Currency">
+            <summary>
+                The currency of the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Description">
+            <summary>
+                The description of the payment order.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Items">
+            <summary>
+                The array of items that will affect how the payment is performed.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Language">
+            <summary>
+                The language of the payer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.RequestDeliveryInfo">
+            <summary>
+            Set to true if you want Swedbank Pay to return delivery information from the payment instruments which support this. The delivery information will then be displayed as the shippingAddress. Currently available for Apple Pay only.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.RestrictedToDeliveryInfoInstruments">
+            <summary>
+            Set to true if you want to restrict your payment menu to only include payment instruments which return delivery info.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.ProductName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Metadata">
+            <summary>
+                The keys and values that should be associated with the payment order. Can be additional identifiers and data you
+                want to associate with the payment.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Operation">
+            <summary>
+                The operation that the payment order is supposed to perform.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.OrderItems">
+            <summary>
+                The array of items being purchased with the order. Used to print on invoices if the payer chooses to pay with
+                invoice, among other things.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.PayeeInfo">
+            <summary>
+                Information about the payee of the payment order
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Payer">
+            <summary>
+                Information about the payee of the payment order
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Swish">
+            <summary>
+            An object that holds different scenarios for Swish payments.	
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.RiskIndicator">
+            <summary>
+            Information about risk indicator
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.Urls">
+            <summary>
+                The urls property of the paymentOrder contains the URIs related to a payment order, including where the consumer
+                gets redirected when going forward
+                with or cancelling a payment session, as well as the callback URI that is used to inform the payee (merchant) of
+                changes or updates made to underlying payments or transaction.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.UserAgent">
+            <summary>
+                The user agent of the payer.
+            </summary>
+        </member>
+        <member name="P:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderRequestDetails.VatAmount">
+            <summary>
+                The amount of VAT in the lowest monetary unit of the currency. E.g. 10000 equals 100.00 NOK and 5000 equals 50.00
+                NOK.
+            </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations">
+            <summary>
+            Known operations for PaymentOrder.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.UpdateOrder">
+            <summary>
+            Updates the order with a change in orderItems, amount and/or vatAmount.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.Abort">
+            <summary>
+            Aborts the payment order before any financial transactions are performed.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.Cancel">
+            <summary>
+            Used to cancel authorized and not yet captured transactions. If a cancellation is performed after doing a part-capture, it will only affect the not yet captured authorization amount.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.Capture">
+            <summary>
+            The second part of a two-phase transaction where the authorized amount is sent from the payer to the payee. It is possible to do a part-capture on a subset of the authorized amount. Several captures on the same payment are possible, up to the total authorization amount.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.Reversal">
+            <summary>
+            Used to reverse a payment. It is only possible to reverse a payment that has been captured and not yet reversed.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.RedirectCheckout">
+            <summary>
+            Contains the URL used to redirect the payer to the Swedbank Pay Payments containing the Payment Menu.
+            </summary>t
+        </member>
+        <member name="F:SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.ViewCheckout">
+            <summary>
+            Contains the JavaScript href that is used to embed the Payment Menu UI directly on the webshop/merchant site.
             </summary>
         </member>
         <member name="T:SwedbankPay.Sdk.PickUpAddress">
@@ -8171,6 +9197,11 @@
             Instantiates a derived class with a <paramref name="httpClient"/>.
             </summary>
             <param name="httpClient"><seealso cref="T:System.Net.Http.HttpClient"/> with authorization for the API.</param>
+        </member>
+        <member name="T:SwedbankPay.Sdk.RiskIndicator">
+            <summary>
+            Risk indicator object for 3D Secure 2.0 risk assessment.
+            </summary>
         </member>
         <member name="P:SwedbankPay.Sdk.RiskIndicator.DeliveryEmailAddress">
             <summary>
@@ -8388,6 +9419,50 @@
             </summary>
             <param name="originalState">he API value of the state.</param>
         </member>
+        <member name="T:SwedbankPay.Sdk.Status">
+            <summary>
+                Initialized, Completed, Failed Ready, Pending or Aborted, or Paid.
+                Indicates the current state.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.Status.Initialized">
+            <summary>
+            Status of payment is Initialized.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.Status.Paid">
+            <summary>
+            Status of payment is Paid.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.Status.Failed">
+            <summary>
+            Status of payment is Failed.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.Status.Cancelled">
+            <summary>
+            Status of payment is Cancelled.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.Status.Aborted">
+            <summary>
+            Status of payment is Aborted.
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.Status.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a <see cref="T:SwedbankPay.Sdk.Status"/> with the provided parameters.
+            </summary>
+            <param name="name">The name of the state.</param>
+            <param name="value">The API value of the state.</param>
+        </member>
+        <member name="M:SwedbankPay.Sdk.Status.op_Implicit(System.String)~SwedbankPay.Sdk.Status">
+            <summary>
+            Converts from a <c>string</c> to a <see cref="T:SwedbankPay.Sdk.State"/>.
+            </summary>
+            <param name="originalState">he API value of the state.</param>
+        </member>
         <member name="T:SwedbankPay.Sdk.SuspiciousAccountActivity">
             <summary>
                 Indicates whether merchant has experienced suspicious activity (including previous fraud) on the cardholder
@@ -8410,6 +9485,44 @@
             <summary>
             Risk indicator to use when suspicious activity has been observed.
             </summary>
+        </member>
+        <member name="T:SwedbankPay.Sdk.TokenType">
+            <summary>
+            The different types of available tokens.
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.TokenType.Payment">
+            <summary>
+            Token of payment type
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.TokenType.Recurrence">
+            <summary>
+            Token of recurrence type
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.TokenType.TransactionOnFile">
+            <summary>
+            Token of transactionOnFile type
+            </summary>
+        </member>
+        <member name="F:SwedbankPay.Sdk.TokenType.Unscheduled">
+            <summary>
+            Token of unscheduled type
+            </summary>
+        </member>
+        <member name="M:SwedbankPay.Sdk.TokenType.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:SwedbankPay.Sdk.TokenType.op_Implicit(System.String)~SwedbankPay.Sdk.TokenType">
+            <summary>
+            Converts a <see cref="T:System.String"/> to a <see cref="T:SwedbankPay.Sdk.InitiatedByType"/>.
+            </summary>
+            <param name="type">The API value to convert.</param>
         </member>
         <member name="T:SwedbankPay.Sdk.TypeSafeEnum`1">
             <summary>

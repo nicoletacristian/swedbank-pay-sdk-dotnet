@@ -1,9 +1,13 @@
 ﻿using Atata;
+
 using NUnit.Framework;
+
 using Sample.AspNetCore.SystemTests.Test.Helpers;
+
 using SwedbankPay.Sdk;
 using SwedbankPay.Sdk.PaymentInstruments;
-using SwedbankPay.Sdk.PaymentOrders;
+using SwedbankPay.Sdk.PaymentOrders.V2;
+
 using System.Linq;
 
 namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Anonymous
@@ -21,7 +25,8 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Anonymous
         [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card })]
         public void Anonymous_PaymentOrder_Card_Cancellation(Product[] products, PayexInfo payexInfo)
         {
-            Assert.DoesNotThrowAsync(async () => {
+            Assert.DoesNotThrowAsync(async () =>
+            {
 
                 GoToOrdersPage(products, payexInfo, Checkout.Option.Anonymous)
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].IsVisible, 60, 10)
@@ -30,7 +35,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Anonymous
                 .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()
                 .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
-                var order = await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                var order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
 
                 // Operations
                 Assert.That(order.Operations[LinkRelation.CreatePaymentOrderCancel], Is.Null);
@@ -53,7 +58,8 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Anonymous
         [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice })]
         public void Anonymous_PaymentOrder_Invoice_Cancellation(Product[] products, PayexInfo payexInfo)
         {
-            Assert.DoesNotThrowAsync(async () => {
+            Assert.DoesNotThrowAsync(async () =>
+            {
 
                 GoToOrdersPage(products, payexInfo, Checkout.Option.Anonymous)
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].IsVisible, 60, 10)
@@ -62,7 +68,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Anonymous
                 .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()
                 .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
-                var order = await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                var order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
 
                 // Operations
                 Assert.That(order.Operations[LinkRelation.CreatePaymentOrderCancel], Is.Null);

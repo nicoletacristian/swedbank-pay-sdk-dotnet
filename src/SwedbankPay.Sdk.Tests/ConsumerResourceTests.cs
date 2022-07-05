@@ -20,7 +20,7 @@ namespace SwedbankPay.Sdk.Tests
             Uri url = null;
 
             //ASSERT
-            await Assert.ThrowsAsync<ArgumentNullException>(nameof(url), () => this.Sut.Consumers.GetBillingDetails(url));
+            await Assert.ThrowsAsync<ArgumentNullException>(nameof(url), () => this.Sut.CheckoutV2.Consumers.GetBillingDetails(url));
         }
 
 
@@ -31,7 +31,7 @@ namespace SwedbankPay.Sdk.Tests
             var uri = new Uri("http://xxx");
 
             //ASSERT
-            await Assert.ThrowsAsync<HttpRequestException>(() => this.Sut.Consumers.GetBillingDetails(uri));
+            await Assert.ThrowsAsync<HttpRequestException>(() => this.Sut.CheckoutV2.Consumers.GetBillingDetails(uri));
         }
 
 
@@ -42,7 +42,7 @@ namespace SwedbankPay.Sdk.Tests
             Uri url = null;
 
             //ASSERT
-            await Assert.ThrowsAsync<ArgumentNullException>(nameof(url), () => this.Sut.Consumers.GetShippingDetails(url));
+            await Assert.ThrowsAsync<ArgumentNullException>(nameof(url), () => this.Sut.CheckoutV2.Consumers.GetShippingDetails(url));
         }
 
 
@@ -53,7 +53,7 @@ namespace SwedbankPay.Sdk.Tests
             var uri = new Uri("http://xxx");
 
             //ASSERT
-            await Assert.ThrowsAsync<HttpRequestException>(() => this.Sut.Consumers.GetShippingDetails(uri));
+            await Assert.ThrowsAsync<HttpRequestException>(() => this.Sut.CheckoutV2.Consumers.GetShippingDetails(uri));
         }
 
 
@@ -65,7 +65,7 @@ namespace SwedbankPay.Sdk.Tests
                 .Build();
 
             //ASSERT
-            await Assert.ThrowsAsync<HttpResponseException>(() => this.Sut.Consumers.InitiateSession(orderResoureRequest));
+            await Assert.ThrowsAsync<HttpResponseException>(() => this.Sut.CheckoutV2.Consumers.InitiateSession(orderResoureRequest));
 
         }
 

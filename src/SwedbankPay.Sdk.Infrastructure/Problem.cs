@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace SwedbankPay.Sdk
@@ -13,6 +14,17 @@ namespace SwedbankPay.Sdk
             Status = dto.Status;
             Title = dto.Title;
             Type = dto.Type;
+            
+            if (dto.Problems != null && dto.Problems.Any())
+            {
+                var problems = new List<IProblemItem>();
+                foreach (var problemItemDto in dto.Problems)
+                {
+                    problems.Add(problemItemDto.Map());
+                }
+
+                Problems = problems;
+            }
         }
 
         public Problem(string action, string detail, string instance, int status, string title, string type)

@@ -20,7 +20,8 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Abort
         [TestCaseSource(nameof(TestData), new object[] { true, null })]
         public void Abort_PaymentOrder(Product[] products)
         {
-            Assert.DoesNotThrowAsync(async () => {
+            Assert.DoesNotThrowAsync(async () =>
+            {
 
                 GoToPayexPaymentPage(products)
                     .Abort.ClickAndGo()
@@ -29,7 +30,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Abort
 
                 var orderLink = message.OriginalString.Substring(message.OriginalString.IndexOf("/")).Replace(" has been Aborted", "");
 
-                var order = await SwedbankPayClient.PaymentOrders.Get(new Uri(orderLink, UriKind.RelativeOrAbsolute), SwedbankPay.Sdk.PaymentOrders.PaymentOrderExpand.All);
+                var order = await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(new Uri(orderLink, UriKind.RelativeOrAbsolute), SwedbankPay.Sdk.PaymentOrders.V2.PaymentOrderExpand.All);
 
                 // Operations
                 Assert.That(order.Operations[LinkRelation.AbortedPaymentOrder], Is.Not.Null);

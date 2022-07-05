@@ -1,9 +1,13 @@
 ﻿using Atata;
+
 using NUnit.Framework;
+
 using Sample.AspNetCore.SystemTests.PageObjectModels.Base;
 using Sample.AspNetCore.SystemTests.Test.Helpers;
+
 using SwedbankPay.Sdk;
-using SwedbankPay.Sdk.PaymentOrders;
+using SwedbankPay.Sdk.PaymentOrders.V2;
+
 using System;
 using System.Linq;
 
@@ -36,7 +40,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.PaymentOrder.Update
                 .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()
                 .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
-                await SwedbankPayClient.PaymentOrders.Get(_link, PaymentOrderExpand.All);
+                await SwedbankPayClient.CheckoutV2.PaymentOrders.Get(_link, PaymentOrderExpand.All);
             });
         }
     }
