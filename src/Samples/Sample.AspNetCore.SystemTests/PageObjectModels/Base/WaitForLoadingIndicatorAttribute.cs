@@ -1,6 +1,4 @@
-﻿using Atata;
-
-namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
+﻿namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
 {
     public class WaitForLoadingIndicatorAttribute : WaitForElementAttribute
     {

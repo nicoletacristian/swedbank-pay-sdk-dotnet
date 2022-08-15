@@ -1,8 +1,4 @@
-﻿using System;
-
-using Atata;
-
-namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
+﻿namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
 {
     /// <summary>
     ///     Specifies that a control should be found by CSS selector with the automation attribute.

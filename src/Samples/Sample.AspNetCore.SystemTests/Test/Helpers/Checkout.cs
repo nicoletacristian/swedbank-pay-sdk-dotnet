@@ -1,12 +1,11 @@
 ﻿namespace Sample.AspNetCore.SystemTests.Test.Helpers
 {
-    public class Checkout
+    public enum Checkout
     {
-        public enum Option
-        {
-            Anonymous,
-            Standard,
-            LocalPaymentMenu
-        }
+        Anonymous,
+        Standard,
+        LocalPaymentMenu,
+        Seamless,
+        Redirect
     }
 }

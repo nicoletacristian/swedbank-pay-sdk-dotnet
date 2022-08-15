@@ -1,4 +1,4 @@
-﻿using Atata;
+﻿using Sample.AspNetCore.SystemTests.PageObjectModels.Products;
 
 namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
 {

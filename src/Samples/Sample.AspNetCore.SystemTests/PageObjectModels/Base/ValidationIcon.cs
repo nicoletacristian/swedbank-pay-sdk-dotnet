@@ -1,6 +1,4 @@
-﻿using Atata;
-
-namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
+﻿namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
 {
     [ControlDefinition(
         "div[contains(concat(' ', normalize-space(@class), ' '), ' px-input-group ')]//div[contains(concat(' ', normalize-space(@class), ' '), ' icon ')]")]

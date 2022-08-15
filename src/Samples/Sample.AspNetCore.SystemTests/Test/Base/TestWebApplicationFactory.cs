@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Sample.AspNetCore.Models;
-using System;
 using System.IO;
-using System.Linq;
 
 namespace Sample.AspNetCore.SystemTests.Test.Base
 {

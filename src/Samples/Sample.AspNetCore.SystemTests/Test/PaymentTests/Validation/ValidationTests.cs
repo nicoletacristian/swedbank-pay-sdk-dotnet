@@ -1,12 +1,6 @@
-﻿using Atata;
-using NUnit.Framework;
-using Sample.AspNetCore.SystemTests.Services;
-using Sample.AspNetCore.SystemTests.Test.Helpers;
-using SwedbankPay.Sdk;
+﻿using Sample.AspNetCore.SystemTests.Services;
 using SwedbankPay.Sdk.Exceptions;
-using SwedbankPay.Sdk.PaymentInstruments;
 using SwedbankPay.Sdk.PaymentInstruments.Swish;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,7 +8,7 @@ using System.Net.Http.Headers;
 namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Validation
 {
     [Ignore("Not needed")]
-    public class ValidationTests : Base.PaymentTests
+    public class ValidationTests : Base.PaymentTestsV2
     {
         public ValidationTests(string driverAlias)
             : base(driverAlias)
@@ -30,7 +24,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Validation
         {
             Assert.DoesNotThrow(() => {
 
-                GoToPayexCardPaymentFrame(products)
+                GoToPayexCardPaymentFrame(products, Checkout.Anonymous)
                 .CreditCardNumber.Set("abc")
                 .ExpiryDate.Set("abcd")
                 .Cvc.Set("abc")
@@ -57,7 +51,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Validation
         {
             Assert.DoesNotThrow(() => {
 
-                GoToPayexInvoicePaymentFrame(products)
+                GoToPayexInvoicePaymentFrame(products, Checkout.Anonymous)
                 .PersonalNumber.Set("abc")
                 .Email.Set("abc")
                 .PhoneNumber.Set("abc")
@@ -85,7 +79,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Validation
         [TestCaseSource(nameof(TestData), new object[] { true, null })]
         public void FieldValidationSwish(Product[] products)
         {
-            GoToPayexSwishPaymentFrame(products);
+            GoToPayexSwishPaymentFrame(products, Checkout.Anonymous);
         }
 
         [Test]

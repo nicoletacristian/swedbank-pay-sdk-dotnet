@@ -1,6 +1,4 @@
-﻿using Atata;
-
-namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
+﻿namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
 {
     using _ = PayexTrustlyFramePage;
 

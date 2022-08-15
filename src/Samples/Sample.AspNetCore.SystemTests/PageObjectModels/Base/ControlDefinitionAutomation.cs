@@ -1,8 +1,4 @@
-﻿using System.Linq;
-
-using Atata;
-
-namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
+﻿namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
 {
     /// <summary>
     ///     Specifies the definition of the control, like scope XPath, visibility, component type name, etc.

@@ -1,8 +1,4 @@
-﻿using System;
-
-using Atata;
-
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace Sample.AspNetCore.SystemTests.PageObjectModels.Base
 {

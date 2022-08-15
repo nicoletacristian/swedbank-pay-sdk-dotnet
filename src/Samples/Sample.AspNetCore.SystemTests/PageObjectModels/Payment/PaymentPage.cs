@@ -1,6 +1,5 @@
-﻿using Atata;
-
-using Sample.AspNetCore.SystemTests.PageObjectModels.Base;
+﻿using Sample.AspNetCore.SystemTests.PageObjectModels.Base;
+using Sample.AspNetCore.SystemTests.PageObjectModels.Products;
 
 namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
 {
@@ -15,9 +14,13 @@ namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
         public HiddenInput<_> PaymentOrder { get; private set; }
 
 
-
         public Frame<IdentificationFramePage, _> IdentificationFrame { get; set; }
 
-        [FindById("paymentMenuFrame")] public Frame<PaymentFramePage, _> PaymentMethodsFrame { get; set; }
+        [FindById("paymentMenuFrame")] public Frame<PaymentFramePageV2, _> PaymentMethodsFrameV2 { get; set; }
+
+        [FindById("pxhv-paymentmenu")] public Frame<PaymentFramePageV2, _> PaymentMethodsFrameV3 { get; set; }
+
+        [FindByClass("cancel")]
+        public Clickable<ProductsPage, _> AbortPayment { get; set; }
     }
 }

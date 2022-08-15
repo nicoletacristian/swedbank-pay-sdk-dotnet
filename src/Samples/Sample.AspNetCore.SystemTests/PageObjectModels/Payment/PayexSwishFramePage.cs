@@ -1,5 +1,4 @@
-﻿using Atata;
-using Sample.AspNetCore.SystemTests.PageObjectModels.ThankYou;
+﻿using Sample.AspNetCore.SystemTests.PageObjectModels.ThankYou;
 
 namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
 {

@@ -81,6 +81,10 @@ namespace Sample.AspNetCore
 			services.AddScoped(provider => SessionCart.GetCart(provider));
 			services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
+			services
+				.AddControllersWithViews()
+				.AddRazorRuntimeCompilation();
+
 			void configureClient(HttpClient a)
 			{
 				a.BaseAddress = swedBankPayOptions.ApiBaseUrl;

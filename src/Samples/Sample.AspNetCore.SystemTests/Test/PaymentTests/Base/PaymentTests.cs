@@ -1,18 +1,12 @@
-﻿using Atata;
-using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
-using Sample.AspNetCore.SystemTests.PageObjectModels;
+﻿using Microsoft.Extensions.Configuration;
 using Sample.AspNetCore.SystemTests.PageObjectModels.Orders;
 using Sample.AspNetCore.SystemTests.PageObjectModels.Payment;
+using Sample.AspNetCore.SystemTests.PageObjectModels.Products;
 using Sample.AspNetCore.SystemTests.PageObjectModels.ThankYou;
 using Sample.AspNetCore.SystemTests.Services;
 using Sample.AspNetCore.SystemTests.Test.Base;
-using Sample.AspNetCore.SystemTests.Test.Helpers;
-using SwedbankPay.Sdk;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -57,7 +51,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
             }
         }
 
-        protected OrdersPage GoToOrdersPage(Product[] products, PayexInfo payexInfo, Checkout.Option checkout = Checkout.Option.Anonymous)
+        protected OrdersPage GoToOrdersPage(Product[] products, PayexInfo payexInfo, Checkout checkout = Checkout.Anonymous)
         {
             ThankYouPage page = null;
 
@@ -73,7 +67,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
                     page = PayWithPayexInvoice(products, invoiceInfo, checkout);
                     break;
                 case PayexTrustlyInfo trustlyInfo:
-                    page = PayWithPayexTrustly(products, trustlyInfo, checkout);
+                    page = PayWithPayexTrustly(products, checkout);
                     break;
             }
 
@@ -84,185 +78,6 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
                 {
                     _link = new Uri(_referenceLink, UriKind.RelativeOrAbsolute);
                 });
-        }
-
-        protected PayexCardFramePage GoToPayexCardPaymentFrame(Product[] products, Checkout.Option checkout = Checkout.Option.Anonymous)
-        {
-            PayexCardFramePage frame = null;
-
-            switch (checkout)
-            {
-                case Checkout.Option.LocalPaymentMenu:
-                    frame = GoToLocalPaymentPage(products, checkout)
-                        .CreditCard.IsVisible.WaitTo.BeTrue()
-                        .CreditCard.Click()
-                        .PaymentFrame.IsVisible.WaitTo.BeTrue()
-                        .PaymentFrame.SwitchTo<PayexCardFramePage>()
-                        .PageSource.WaitTo.WithinSeconds(15).Contain("/psp/");
-
-                    _referenceLink = frame.PageSource.GetPaymentOrderFromBody();
-
-                    break;
-
-                default:
-
-                    frame = GoToPaymentFramePage(products, checkout)
-                        .PaymentMethods[x => x.Name == PaymentMethods.Card].IsVisible.WaitTo.BeTrue()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Card].Click()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Card].PaymentFrame.SwitchTo<PayexCardFramePage>();
-
-                    if (frame.CardTypeSelector.Exists())
-                    {
-                        frame.CardTypeSelector.Check();
-                    }
-
-                    break;
-            }
-
-            return frame;
-        }
-
-        protected PayexInvoiceFramePage GoToPayexInvoicePaymentFrame(Product[] products, Checkout.Option checkout = Checkout.Option.Anonymous)
-        {
-            PayexInvoiceFramePage frame = null;
-
-            switch (checkout)
-            {
-                case Checkout.Option.LocalPaymentMenu:
-                    frame = GoToLocalPaymentPage(products, checkout)
-                        .Invoice.IsVisible.WaitTo.BeTrue()
-                        .Invoice.Click()
-                        .PaymentFrame.IsVisible.WaitTo.BeTrue()
-                        .PaymentFrame.SwitchTo<PayexInvoiceFramePage>()
-                        .PageSource.WaitTo.WithinSeconds(15).Contain("/psp/");
-
-                    _referenceLink = frame.PageSource.GetPaymentOrderFromBody();
-
-                    break;
-                default:
-                    frame = GoToPaymentFramePage(products, checkout)
-                        .PaymentMethods[x => x.Name == PaymentMethods.Invoice].IsVisible.WaitTo.BeTrue()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Invoice].Click()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Invoice].PaymentFrame.SwitchTo<PayexInvoiceFramePage>();
-                    break;
-            }
-
-            return frame;
-        }
-
-        protected PayexSwishFramePage GoToPayexSwishPaymentFrame(Product[] products, Checkout.Option checkout = Checkout.Option.Anonymous)
-        {
-            PayexSwishFramePage frame = null;
-
-            switch (checkout)
-            {
-                case Checkout.Option.LocalPaymentMenu:
-                    frame = GoToLocalPaymentPage(products, checkout)
-                                .Swish.IsVisible.WaitTo.BeTrue()
-                                .Swish.Click()
-                                .PaymentFrame.IsVisible.WaitTo.BeTrue()
-                                .PaymentFrame.SwitchTo<PayexSwishFramePage>()
-                                .PageSource.WaitTo.WithinSeconds(15).Contain("/psp/");
-
-                    _referenceLink = frame.PageSource.GetPaymentOrderFromBody();
-
-                    break;
-                default:
-                    frame = GoToPaymentFramePage(products, checkout)
-                        .PaymentMethods[x => x.Name == PaymentMethods.Swish].IsVisible.WaitTo.BeTrue()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Swish].Click()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Swish].PaymentFrame.SwitchTo<PayexSwishFramePage>();
-                    break;
-            }
-
-            return frame;
-        }
-
-        protected PayexTrustlyFramePage GoToPayexTrustlyPaymentFrame(Product[] products, Checkout.Option checkout = Checkout.Option.Anonymous)
-        {
-            PayexTrustlyFramePage frame = null;
-
-            switch (checkout)
-            {
-                case Checkout.Option.LocalPaymentMenu:
-                    frame = GoToLocalPaymentPage(products, checkout)
-                        .Trustly.IsVisible.WaitTo.BeTrue()
-                        .Trustly.Click()
-                        .PaymentFrame.IsVisible.WaitTo.BeTrue()
-                        .PaymentFrame.SwitchTo<PayexTrustlyFramePage>()
-                        .PageSource.WaitTo.WithinSeconds(15).Contain("/psp/");
-
-                    _referenceLink = frame.PageSource.GetPaymentOrderFromBody();
-
-                    break;
-                default:
-                    frame = GoToPaymentFramePage(products, checkout)
-                        .PaymentMethods[x => x.Name == PaymentMethods.Trustly].IsVisible.WaitTo.BeTrue()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Trustly].Click()
-                        .PaymentMethods[x => x.Name == PaymentMethods.Trustly].PaymentFrame.SwitchTo<PayexTrustlyFramePage>();
-                    break;
-            }
-
-            return frame;
-        }
-
-        protected PaymentFramePage GoToPaymentFramePage(Product[] products, Checkout.Option checkout = Checkout.Option.Anonymous)
-        {
-            PaymentFramePage frame = null;
-
-            switch (checkout)
-            {
-                case Checkout.Option.Standard:
-                    frame = GoToPayexPaymentPage(products, checkout)
-                        .IdentificationFrame.SwitchTo()
-                        .Email.IsVisible.WaitTo.BeTrue()
-                        .Email.SetWithSpeed(TestDataService.Email, interval: 0.1)
-                        .PhoneNumber.SetWithSpeed(TestDataService.SwedishPhoneNumber, interval: 0.1)
-                        .Next.Click()
-                        .WaitSeconds(1)
-                        .Do(x => { 
-                            if(x.SaveMyInformation.IsVisible)
-                            {
-                                x.SaveMyInformation.Click();
-                                x.PersonalNumber.SetWithSpeed(TestDataService.PersonalNumber, interval: 0.1);
-                                x.Next.Click();
-                                x.FirstName.SetWithSpeed(TestDataService.FirstName, interval: 0.1);
-                                x.LastName.SetWithSpeed(TestDataService.LastName, interval: 0.1);
-                                x.Address.SetWithSpeed(TestDataService.Street, interval: 0.1);
-                                x.ZipCode.SetWithSpeed(TestDataService.ZipCode, interval: 0.1);
-                                x.City.SetWithSpeed(TestDataService.City, interval: 0.1);
-                                x.Next.Click();
-                            }
-                        })
-                        .SwitchToRoot<PaymentPage>().WaitSeconds(20)
-                        .PaymentMethodsFrame.SwitchTo();
-                    break;
-                default:
-                    frame = GoToPayexPaymentPage(products, checkout)
-                        .PaymentMethodsFrame.IsVisible.WaitTo.BeTrue()
-                        .PaymentMethodsFrame.SwitchTo();
-                    break;
-            }
-
-            _referenceLink = frame.PageSource.GetPaymentOrderFromBody();
-
-            return frame;
-        }
-
-        protected static LocalPaymentMenuPage GoToLocalPaymentPage(Product[] products, Checkout.Option checkout)
-        {
-            return SelectProducts(products)
-                    .LocalPaymentMenu.ClickAndGo();
-                    
-        }
-
-        protected static PaymentPage GoToPayexPaymentPage(Product[] products, Checkout.Option checkout = Checkout.Option.Anonymous)
-        {
-            return checkout switch
-            {
-                Checkout.Option.Standard => SelectProducts(products).StandardCheckout.ClickAndGo(),
-                _ => SelectProducts(products).AnonymousCheckout.ClickAndGo()
-            };
         }
 
         protected static ProductsPage SelectProducts(Product[] products)
@@ -295,43 +110,51 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
                 });
         }
 
-        protected ThankYouPage PayWithPayexCard(Product[] products, PayexCardInfo info, Checkout.Option checkout = Checkout.Option.Anonymous)
+        protected abstract PayexCardFramePage GoToPayexCardPaymentFrame(Product[] products, Checkout checkout);
+
+        protected abstract PayexInvoiceFramePage GoToPayexInvoicePaymentFrame(Product[] products, Checkout checkout);
+
+        protected abstract PayexSwishFramePage GoToPayexSwishPaymentFrame(Product[] products, Checkout checkout);
+
+        protected abstract PayexTrustlyFramePage GoToPayexTrustlyPaymentFrame(Product[] products, Checkout checkout);
+
+        protected ThankYouPage PayWithPayexCard(Product[] products, PayexCardInfo info, Checkout checkout)
         {
             return checkout switch
             {
-                Checkout.Option.Standard => GoToPayexCardPaymentFrame(products, checkout)
-                                       .Do(x =>
-                                       {
-                                           if (x.PreFilledCards.Exists(new SearchOptions { IsSafely = true, Timeout = TimeSpan.FromSeconds(3) }))
-                                           {
-                                               if (x.PreFilledCards.Items[y => y.CreditCardNumber.Value.Contains(info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Exists())
-                                               {
-                                                   x
-                                                   .PreFilledCards
-                                                   .Items[
-                                                       y => y.CreditCardNumber.Value.Contains(
-                                                           info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Click()
-                                                   .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
-                                               }
-                                               else
-                                               {
-                                                   x
-                                                   .AddNewCard.Click()
-                                                   .CreditCardNumber.SetWithSpeed(TestDataService.CreditCardNumber, interval: 0.1)
-                                                   .ExpiryDate.SetWithSpeed(TestDataService.CreditCardExpirationDate, interval: 0.1)
-                                                   .Cvc.SetWithSpeed(TestDataService.CreditCardCvc, interval: 0.1);
-                                               }
-                                           }
-                                           else if (x.CreditCardNumber.Exists(new SearchOptions { IsSafely = true, Timeout = TimeSpan.FromSeconds(3) }))
-                                           {
-                                               x
-                                               .CreditCardNumber.SetWithSpeed(info.CreditCardNumber, interval: 0.1)
-                                               .ExpiryDate.SetWithSpeed(info.ExpiryDate, interval: 0.1)
-                                               .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
-                                           }
-                                       })
-                                       .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                                       .Pay.ClickAndGo(),
+                Checkout.Standard => GoToPayexCardPaymentFrame(products, checkout)
+                    .Do(x =>
+                    {
+                        if (x.PreFilledCards.Exists(new SearchOptions { IsSafely = true, Timeout = TimeSpan.FromSeconds(3) }))
+                        {
+                            if (x.PreFilledCards.Items[y => y.CreditCardNumber.Value.Contains(info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Exists())
+                            {
+                                x
+                                .PreFilledCards
+                                .Items[
+                                    y => y.CreditCardNumber.Value.Contains(
+                                        info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Click()
+                                .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
+                            }
+                            else
+                            {
+                                x
+                                .AddNewCard.Click()
+                                .CreditCardNumber.SetWithSpeed(TestDataService.CreditCardNumber, interval: 0.1)
+                                .ExpiryDate.SetWithSpeed(TestDataService.CreditCardExpirationDate, interval: 0.1)
+                                .Cvc.SetWithSpeed(TestDataService.CreditCardCvc, interval: 0.1);
+                            }
+                        }
+                        else if (x.CreditCardNumber.Exists(new SearchOptions { IsSafely = true, Timeout = TimeSpan.FromSeconds(3) }))
+                        {
+                            x
+                            .CreditCardNumber.SetWithSpeed(info.CreditCardNumber, interval: 0.1)
+                            .ExpiryDate.SetWithSpeed(info.ExpiryDate, interval: 0.1)
+                            .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
+                        }
+                    })
+                    .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
+                    .Pay.ClickAndGo(),
                 _ => GoToPayexCardPaymentFrame(products, checkout)
                     .CreditCardNumber.IsVisible.WaitTo.BeTrue()
                     .CreditCardNumber.SetWithSpeed(info.CreditCardNumber, interval: 0.1)
@@ -342,11 +165,11 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
             };
         }
 
-        protected ThankYouPage PayWithPayexInvoice(Product[] products, PayexInvoiceInfo info, Checkout.Option checkout = Checkout.Option.Anonymous)
+        protected ThankYouPage PayWithPayexInvoice(Product[] products, PayexInvoiceInfo info, Checkout checkout)
         {
             return checkout switch
             {
-                Checkout.Option.Standard => GoToPayexInvoicePaymentFrame(products, checkout)
+                Checkout.Standard => GoToPayexInvoicePaymentFrame(products, checkout)
                                        .PersonalNumber.IsVisible.WaitTo.BeTrue()
                                        .PersonalNumber.SetWithSpeed(info.PersonalNumber.Substring(info.PersonalNumber.Length - 4), interval: 0.15)
                                        .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
@@ -365,11 +188,11 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
             };
         }
 
-        protected ThankYouPage PayWithPayexSwish(Product[] products, PayexSwishInfo info, Checkout.Option checkout = Checkout.Option.Anonymous)
+        protected ThankYouPage PayWithPayexSwish(Product[] products, PayexSwishInfo info, Checkout checkout)
         {
             return checkout switch
             {
-                Checkout.Option.Standard => GoToPayexSwishPaymentFrame(products, checkout)
+                Checkout.Standard => GoToPayexSwishPaymentFrame(products, checkout)
                                    .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
                                    .Pay.ClickAndGo(),
                 _ => GoToPayexSwishPaymentFrame(products, checkout)
@@ -380,7 +203,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
             };
         }
 
-        protected ThankYouPage PayWithPayexTrustly(Product[] products, PayexTrustlyInfo info, Checkout.Option checkout = Checkout.Option.Anonymous)
+        protected ThankYouPage PayWithPayexTrustly(Product[] products, Checkout checkout)
         {
 
             return GoToPayexTrustlyPaymentFrame(products, checkout)

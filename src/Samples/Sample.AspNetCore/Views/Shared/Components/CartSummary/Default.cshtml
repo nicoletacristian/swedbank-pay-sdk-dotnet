@@ -55,20 +55,52 @@
     </tr>
     </tfoot>
 </table>
-<div class="text-center">
-    <a class="btn btn-primary" automation="button-checkout" asp-action="InitiateConsumerSession" asp-controller="CheckOut">
-        Checkout V2/Checkin
-    </a>
-    <a class="btn btn-primary" automation="button-checkout" asp-action="LoadPaymentMenu" asp-controller="CheckOut">
-        Checkout V2/Payment Menu
-    </a>
-    <a class="btn btn-secondary" automation="button-checkout" asp-action="LoadCardPaymentMenu" asp-controller="CheckOut">
-        Payment Instruments
-    </a>
-    <a class="btn btn-warning" automation="button-checkout" asp-action="CheckoutV3SeamlessView" asp-controller="CheckOut">
-        Checkout V3 Seamless
-    </a>
-    <a class="btn btn-warning" automation="button-checkout" asp-action="CheckoutV3Redirect" asp-controller="CheckOut">
-        Checkout V3 Redirect
-    </a>
+<div class="d-flex p-1">
+    <div class="w-25 mr-3 text-left">
+        <span class="font-weight-bold" style="vertical-align: middle;">CheckoutV2</span>
+    </div>
+    <div class="text-left w-100 d-flex flex-row">
+        <div class="col">
+            <a class="btn btn-primary w-100 ml-2" automation="button-checkout-v2" asp-action="InitiateConsumerSession" asp-controller="CheckOut">
+            Checkout/Checkin
+            </a>
+        </div>
+        <div class="col">
+            <a class="btn btn-primary w-100 ml-2" automation="button-checkout-v2" asp-action="LoadPaymentMenu" asp-controller="CheckOut">
+                Checkout/Payment Menu
+            </a>
+        </div>
+    </div>
 </div>
+<hr class="my-2" style="border-bottom: 1px solid black;" />
+<div class="d-flex p-1">
+    <div class="w-25 mr-3 text-left">
+        <span class="font-weight-bold" style="vertical-align: middle;">CheckoutV3</span>
+    </div>
+    <div class="text-left w-100 d-flex flex-row">
+        <div class="col">
+            <a class="btn btn-warning w-100 ml-2" automation="button-checkout-v3" asp-action="CheckoutV3SeamlessView" asp-controller="CheckOut">
+                Seamless
+            </a>
+        </div>
+        <div class="col">
+            <a class="btn btn-warning w-100 ml-2" automation="button-checkout-v3" asp-action="CheckoutV3Redirect" asp-controller="CheckOut">
+                Redirect
+            </a>
+        </div>
+    </div>
+</div>
+<hr class="my-2" style="border-bottom: 1px solid black;" />
+<div class="d-flex p-1">
+    <div class="w-25 mr-3 text-left">
+        <span class="font-weight-bold" style="vertical-align: middle;"></span>
+    </div>
+    <div class="text-left w-100 flex-fill">
+        <div class="col">
+            <a class="btn btn-secondary w-100 ml-2" automation="button-checkout-v2" asp-action="LoadCardPaymentMenu" asp-controller="CheckOut">
+                Payment Instruments
+            </a>
+        </div>
+    </div>
+</div>
+<hr class="my-2" style="border-bottom: 1px solid black;" />

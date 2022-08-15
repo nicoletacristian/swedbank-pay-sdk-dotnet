@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sample.AspNetCore.SystemTests.Services
+﻿namespace Sample.AspNetCore.SystemTests.Services
 {
     public static class TestDataService
     {
