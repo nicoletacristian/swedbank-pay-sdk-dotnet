@@ -58,16 +58,20 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
             switch (payexInfo)
             {
                 case PayexCardInfo cardInfo:
-                    page = PayWithPayexCard(products, cardInfo, checkout);
+                    page = GoToPayexPaymentFrame<PayexCardFramePage>(products, checkout)
+                        .PayWithPayexCard(cardInfo, products, checkout);
                     break;
                 case PayexSwishInfo swishInfo:
-                    page = PayWithPayexSwish(products, swishInfo, checkout);
+                    page = GoToPayexPaymentFrame<PayexSwishFramePage>(products, checkout)
+                        .PayWithPayexSwish(swishInfo, products, checkout);
                     break;
                 case PayexInvoiceInfo invoiceInfo:
-                    page = PayWithPayexInvoice(products, invoiceInfo, checkout);
+                    page = GoToPayexPaymentFrame<PayexInvoiceFramePage>(products, checkout)
+                           .PayWithPayexInvoice(invoiceInfo, products, checkout); 
                     break;
                 case PayexTrustlyInfo trustlyInfo:
-                    page = PayWithPayexTrustly(products, checkout);
+                    page = GoToPayexPaymentFrame<PayexTrustlyFramePage>(products, checkout)
+                           .PayWithPayexTrustly();
                     break;
             }
 
@@ -110,123 +114,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
                 });
         }
 
-        protected abstract PayexCardFramePage GoToPayexCardPaymentFrame(Product[] products, Checkout checkout);
-
-        protected abstract PayexInvoiceFramePage GoToPayexInvoicePaymentFrame(Product[] products, Checkout checkout);
-
-        protected abstract PayexSwishFramePage GoToPayexSwishPaymentFrame(Product[] products, Checkout checkout);
-
-        protected abstract PayexTrustlyFramePage GoToPayexTrustlyPaymentFrame(Product[] products, Checkout checkout);
-
-        protected ThankYouPage PayWithPayexCard(Product[] products, PayexCardInfo info, Checkout checkout)
-        {
-            return checkout switch
-            {
-                Checkout.Standard => GoToPayexCardPaymentFrame(products, checkout)
-                    .Do(x =>
-                    {
-                        if (x.PreFilledCards.Exists(new SearchOptions { IsSafely = true, Timeout = TimeSpan.FromSeconds(3) }))
-                        {
-                            if (x.PreFilledCards.Items[y => y.CreditCardNumber.Value.Contains(info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Exists())
-                            {
-                                x
-                                .PreFilledCards
-                                .Items[
-                                    y => y.CreditCardNumber.Value.Contains(
-                                        info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Click()
-                                .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
-                            }
-                            else
-                            {
-                                x
-                                .AddNewCard.Click()
-                                .CreditCardNumber.SetWithSpeed(TestDataService.CreditCardNumber, interval: 0.1)
-                                .ExpiryDate.SetWithSpeed(TestDataService.CreditCardExpirationDate, interval: 0.1)
-                                .Cvc.SetWithSpeed(TestDataService.CreditCardCvc, interval: 0.1);
-                            }
-                        }
-                        else if (x.CreditCardNumber.Exists(new SearchOptions { IsSafely = true, Timeout = TimeSpan.FromSeconds(3) }))
-                        {
-                            x
-                            .CreditCardNumber.SetWithSpeed(info.CreditCardNumber, interval: 0.1)
-                            .ExpiryDate.SetWithSpeed(info.ExpiryDate, interval: 0.1)
-                            .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
-                        }
-                    })
-                    .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                    .Pay.ClickAndGo(),
-                _ => GoToPayexCardPaymentFrame(products, checkout)
-                    .CreditCardNumber.IsVisible.WaitTo.BeTrue()
-                    .CreditCardNumber.SetWithSpeed(info.CreditCardNumber, interval: 0.1)
-                    .ExpiryDate.SetWithSpeed(info.ExpiryDate, interval: 0.1)
-                    .Cvc.SetWithSpeed(info.Cvc, interval: 0.1)
-                    .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                    .Pay.ClickAndGo(),
-            };
-        }
-
-        protected ThankYouPage PayWithPayexInvoice(Product[] products, PayexInvoiceInfo info, Checkout checkout)
-        {
-            return checkout switch
-            {
-                Checkout.Standard => GoToPayexInvoicePaymentFrame(products, checkout)
-                                       .PersonalNumber.IsVisible.WaitTo.BeTrue()
-                                       .PersonalNumber.SetWithSpeed(info.PersonalNumber.Substring(info.PersonalNumber.Length - 4), interval: 0.15)
-                                       .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                                       .Pay.ClickAndGo(),
-                _ => GoToPayexInvoicePaymentFrame(products, checkout)
-                    .PersonalNumber.IsVisible.WaitTo.BeTrue()
-                    .PersonalNumber.SetWithSpeed(info.PersonalNumber, interval: 0.1)
-                    .Email.SetWithSpeed(info.Email, interval: 0.1)
-                    .PhoneNumber.SetWithSpeed(info.PhoneNumber, interval: 0.1)
-                    .ZipCode.SetWithSpeed(info.ZipCode, interval: 0.1)
-                    .Next.Click()
-                    .WaitSeconds(5)
-                    .Pay.IsVisible.WaitTo.WithinSeconds(20).BeTrue()
-                    .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                    .Pay.ClickAndGo(),
-            };
-        }
-
-        protected ThankYouPage PayWithPayexSwish(Product[] products, PayexSwishInfo info, Checkout checkout)
-        {
-            return checkout switch
-            {
-                Checkout.Standard => GoToPayexSwishPaymentFrame(products, checkout)
-                                   .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                                   .Pay.ClickAndGo(),
-                _ => GoToPayexSwishPaymentFrame(products, checkout)
-                      .SwishNumber.IsVisible.WaitTo.BeTrue()
-                      .SwishNumber.SetWithSpeed(info.SwishNumber, interval: 0.1)
-                      .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
-                      .Pay.ClickAndGo(),
-            };
-        }
-
-        protected ThankYouPage PayWithPayexTrustly(Product[] products, Checkout checkout)
-        {
-
-            return GoToPayexTrustlyPaymentFrame(products, checkout)
-                .Submit.IsVisible.WaitTo.WithinSeconds(15).BeTrue()
-                .Submit.ClickAndGo<TrustlyPaymentPage>()
-                .Banks[0].IsVisible.WaitTo.WithinSeconds(15).BeTrue()
-                .Banks[0].Click()
-                .Next.Click()
-                .PersonalNumber.Set(TestDataService.PersonalNumber)
-                .SecurityCodeOption.Click()
-                .Next.Click()
-                .MessageCode.StoreValue(out string code)
-                .Code.Set(code)
-                .Next.Click()
-                .AccountOptions.IsVisible.WaitTo.WithinSeconds(60).BeTrue()
-                .Next.Click()
-                .MessageCode.StoreValue(out code)
-                .Code.Set(code)
-                .Next.Click()
-                .PageUrl.Should.WithinSeconds(60).Contain("Thankyou")
-                .SwitchToRoot<ThankYouPage>()
-                .ThankYou.IsVisible.WaitTo.BeTrue();
-        }
+        protected abstract T GoToPayexPaymentFrame<T>(Product[] products, Checkout checkout) where T : Page<T>;
 
         protected static IEnumerable TestData(bool singleProduct = true, string paymentMethod = PaymentMethods.Card)
         {

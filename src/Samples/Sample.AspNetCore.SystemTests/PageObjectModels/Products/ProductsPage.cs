@@ -7,29 +7,12 @@ namespace Sample.AspNetCore.SystemTests.PageObjectModels.Products
 
     public class ProductsPage : BasePage<_>
     {
-        [FindByXPath("table[2]")] public Table<ProductBasketItem, _> CartProducts { get; set; }
-
         [FindByClass("alert alert-success")] public Text<_> Message { get; set; }
 
-        [FindByXPath("table[1]")] public Table<ProductItem, _> Products { get; set; }
-
-        [FindByAutomation("a", "button-checkout-v2", Index = 0)]
-        public LinkDelegate<PaymentPage, _> StandardCheckout { get; set; }
-
-        [FindByAutomation("a", "button-checkout-v2", Index = 1)]
-        public LinkDelegate<PaymentPage, _> AnonymousCheckout { get; set; }
-
-        [FindByAutomation("a", "button-checkout-v2", Index = 2)]
-        public LinkDelegate<LocalPaymentMenuPage, _> LocalPaymentMenu { get; set; }
-
-        [FindByAutomation("a", "button-checkout-v3", Index = 0)]
-        public LinkDelegate<PaymentPage, _> SeamlessCheckout { get; set; }
-
-        [FindByAutomation("a", "button-checkout-v3", Index = 1)]
-        public LinkDelegate<PaymentPage, _> RedirectCheckout { get; set; }
-
-        [FindByXPath("table[2]//tfoot[1]//td[2]")]
-        public Text<_> TotalAmount { get; set; }
+        
+        /*
+         * Product Table
+         */
 
         public class ProductBasketItem : TableRow<_>
         {
@@ -55,5 +38,32 @@ namespace Sample.AspNetCore.SystemTests.PageObjectModels.Products
 
             [FindByXPath("td[5]")] public Text<_> Price { get; set; }
         }
+
+        [FindByXPath("table[1]")] public Table<ProductItem, _> Products { get; set; }
+        
+        [FindByXPath("table[2]")] public Table<ProductBasketItem, _> CartProducts { get; set; }
+
+        [FindByXPath("table[2]//tfoot[1]//td[2]")]
+        public Text<_> TotalAmount { get; set; }
+
+        /*
+         * Checkout buttons
+         */
+
+        [FindByAutomation("a", "button-checkout-v2", Index = 0)]
+        public LinkDelegate<PaymentPageV2, _> StandardCheckout { get; set; }
+
+        [FindByAutomation("a", "button-checkout-v2", Index = 1)]
+        public LinkDelegate<PaymentPageV2, _> AnonymousCheckout { get; set; }
+
+        [FindByAutomation("a", "button-checkout-v2", Index = 2)]
+        public LinkDelegate<LocalPaymentMenuPage, _> LocalPaymentMenu { get; set; }
+
+        [FindByAutomation("a", "button-checkout-v3", Index = 0)]
+        public LinkDelegate<PaymentPageV3, _> SeamlessCheckout { get; set; }
+
+        [FindByAutomation("a", "button-checkout-v3", Index = 1)]
+        public LinkDelegate<PaymentPageV3, _> RedirectCheckout { get; set; }
+
     }
 }

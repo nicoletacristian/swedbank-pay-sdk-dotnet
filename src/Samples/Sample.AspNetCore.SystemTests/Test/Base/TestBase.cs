@@ -1,7 +1,4 @@
-﻿using System;
-using Atata;
-using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium.Chrome;
 
 using Sample.AspNetCore.SystemTests.Services;
 
@@ -31,12 +28,13 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
         {
             TestContext.Out?.WriteLine("Running: " + TestContext.CurrentContext.Test.Name);
 
-            _testWebApplicationFactory = new TestWebApplicationFactory();
+            //this.testWebApplicationFactory = new TestWebApplicationFactory();
             var chromeOptions = DriverOptionsFactory.GetDriverOptions(Driver.Chrome) as ChromeOptions;
             AtataContext.Configure()
                         .UseChrome()
                         .WithOptions(chromeOptions)
-                        .UseBaseUrl(_testWebApplicationFactory.RootUri)
+                        //.UseBaseUrl(_testWebApplicationFactory.RootUri)
+                        .UseBaseUrl("https://localhost:44391/")
                         .Build();
         }
 
@@ -54,7 +52,7 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
             }
 
             AtataContext.Current?.CleanUp();
-            _testWebApplicationFactory.Dispose();
+            _testWebApplicationFactory?.Dispose();
         }
 
         public string PageSource()

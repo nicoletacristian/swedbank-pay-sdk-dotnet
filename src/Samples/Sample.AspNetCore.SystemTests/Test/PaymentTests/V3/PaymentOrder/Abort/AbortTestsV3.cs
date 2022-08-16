@@ -19,12 +19,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Abort
             Assert.DoesNotThrowAsync(async () =>
             {
                 var frame = GoToPayexPaymentPage(products, Checkout.Redirect)
-                    .PaymentMethodsFrameV3.SwitchTo<PaymentFramePageV2>();
+                    .PaymentMethodsFrameRedirect.SwitchTo<PaymentFramePage>();
 
                 var orderLink = frame.PageSource.GetPaymentOrderFromBody();
 
                 frame
-                    .SwitchToRoot<PaymentPage>()
+                    .SwitchToRoot<PaymentPageV3>()
                     .AbortPayment.ClickAndGo()
                     .Header.Products.ClickAndGo();
 

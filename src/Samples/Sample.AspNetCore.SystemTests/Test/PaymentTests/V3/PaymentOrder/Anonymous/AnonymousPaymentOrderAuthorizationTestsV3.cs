@@ -18,7 +18,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Anonym
             Assert.DoesNotThrowAsync(async () =>
             {
 
-                GoToOrdersPage(products, payexInfo, Checkout.Anonymous)
+                GoToOrdersPage(products, payexInfo, Checkout.Redirect)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCapture)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()

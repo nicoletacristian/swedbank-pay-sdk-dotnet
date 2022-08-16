@@ -47,7 +47,6 @@
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
                 GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].ExecuteAction.ClickAndGo()

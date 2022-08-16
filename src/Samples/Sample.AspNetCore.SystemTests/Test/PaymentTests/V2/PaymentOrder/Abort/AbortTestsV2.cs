@@ -17,8 +17,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Abort
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
-                GoToPayexPaymentPageV2(products, Checkout.Anonymous)
+                GoToPayexPaymentPage(products, Checkout.Anonymous)
                     .Abort.ClickAndGo()
                     .Message.StoreValueAsUri(out var message)
                     .Header.Products.ClickAndGo();

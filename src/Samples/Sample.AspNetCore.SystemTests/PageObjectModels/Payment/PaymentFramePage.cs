@@ -1,8 +1,8 @@
 ﻿namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
 {
-    using _ = PaymentFramePageV2;
+    using _ = PaymentFramePage;
 
-    public class PaymentFramePageV2 : Page<_>
+    public class PaymentFramePage : Page<_>
     {
         [WaitSeconds(2, TriggerEvents.BeforeClick)]
         [FindById("paymentmenu-container")]

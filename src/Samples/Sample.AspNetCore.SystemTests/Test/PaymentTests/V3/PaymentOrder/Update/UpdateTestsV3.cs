@@ -1,4 +1,5 @@
 ﻿using Sample.AspNetCore.SystemTests.PageObjectModels.Base;
+using Sample.AspNetCore.SystemTests.PageObjectModels.Payment;
 using SwedbankPay.Sdk.PaymentOrders.V2;
 
 namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Update
@@ -19,7 +20,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Update
             Assert.DoesNotThrowAsync(async () =>
             {
 
-                GoToPayexSwishPaymentFrame(products.Skip(1).ToArray(), Checkout.Anonymous)
+                GoToPayexPaymentFrame<PayexSwishFramePage>(products.Skip(1).ToArray(), Checkout.Anonymous)
                 .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Skip(1).First().UnitPrice / 100 * products.Skip(1).First().Quantity))} kr")
                 .SwitchToRoot<HomePage>()
                 .Header.Products.ClickAndGo();
