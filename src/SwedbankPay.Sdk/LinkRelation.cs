@@ -45,6 +45,12 @@ namespace SwedbankPay.Sdk
             new LinkRelation(nameof(UpdateAbort), PaymentOrderResourceOperations.UpdatePaymentOrderAbort);
 
         /// <summary>
+        /// <seealso cref="LinkRelation"/> for PaymentOrder Abort.
+        /// </summary>
+        public static readonly LinkRelation Abort =
+            new LinkRelation(nameof(Abort), SwedbankPay.Sdk.PaymentOrders.V3.PaymentOrderResourceOperations.Abort);
+
+        /// <summary>
         /// <seealso cref="LinkRelation"/> for PaymentOrder UpdatePaymentorderReversal.
         /// </summary>
         public static readonly LinkRelation CreatePaymentOrderReversal =

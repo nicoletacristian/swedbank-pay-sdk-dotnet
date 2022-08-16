@@ -5,6 +5,7 @@
 }
 
 <h1>SwedbankPay menu</h1>
+<span>@Model.PaymentOrderId?.ToString()</span>
 
 @await Html.PartialAsync("_SwedbankPayCheckOut", Model)
 
@@ -13,7 +14,7 @@
 {
     <div class="row justify-content-center">
         <div class="col">
-            <form asp-action="AbortPaymentOrder" asp-controller="Payment" method="post">
+            <form asp-action="AbortPaymentOrder" asp-controller="Payment" method="post" asp-route-checkoutversion="@Model.Version">
                 <input type="hidden" name="paymentOrderId"
                        value="@Model.AbortOperationLink.OriginalString"/>
                 <button type="submit" class="btn btn-lg btn-danger" automation="button-abort">

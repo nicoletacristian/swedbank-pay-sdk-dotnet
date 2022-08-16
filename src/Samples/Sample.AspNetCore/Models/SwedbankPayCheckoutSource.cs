@@ -14,5 +14,6 @@ namespace Sample.AspNetCore.Models
         public bool UseAnonymousCheckout { get; set; }
         public Uri ConsumerUiScriptSource { get; set; }
         public Uri PaymentOrderId { get; set; }
+        public int Version { get; set; }
     }
 }
