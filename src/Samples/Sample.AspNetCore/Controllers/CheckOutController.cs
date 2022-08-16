@@ -604,9 +604,14 @@ namespace Sample.AspNetCore.Controllers
         }
 
 
-        public ViewResult Aborted()
+        public IActionResult Aborted()
         {
-            return View();
+            TempData["AbortMessage"] = $"Payment Order: {this.cartService.PaymentOrderLink} has been Aborted";
+
+            this.cartService.PaymentOrderLink = null;
+            this.cartService.Update();
+
+            return RedirectToAction(nameof(Index), "Products");
         }
 
 
