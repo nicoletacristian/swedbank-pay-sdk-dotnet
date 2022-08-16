@@ -522,7 +522,7 @@ namespace Sample.AspNetCore.Controllers
                 PaymentOrderId = paymentOrder.PaymentOrder.Id,
                 JavascriptSource = jsSource,
                 Culture = CultureInfo.GetCultureInfo("sv-SE"),
-                AbortOperationLink = paymentOrder.Operations[LinkRelation.UpdateAbort]?.Href
+                AbortOperationLink = paymentOrder.Operations[LinkRelation.Abort]?.Href
             };
 
             return View(swedbankPaySource);
@@ -546,10 +546,12 @@ namespace Sample.AspNetCore.Controllers
 
             var swedbankPaySource = new SwedbankPayCheckoutSource
             {
+                PaymentOrderId = paymentOrder.PaymentOrder.Id,
                 JavascriptSource = jsSource,
                 Culture = CultureInfo.GetCultureInfo("sv-SE"),
                 UseAnonymousCheckout = true,
-                AbortOperationLink = paymentOrder.Operations[LinkRelation.UpdateAbort]?.Href
+                AbortOperationLink = paymentOrder.Operations[LinkRelation.UpdateAbort]?.Href,
+                Version = this.cartService.Version
             };
 
             return View("Checkout", swedbankPaySource);
