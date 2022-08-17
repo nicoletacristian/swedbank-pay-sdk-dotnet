@@ -12,13 +12,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Standa
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card })]
-        public void Standard_PaymentOrder_Card_Cancellation(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Standard })]
+        public void Standard_PaymentOrder_Card_Cancellation(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
-                GoToOrdersPage(products, payexInfo, Checkout.Standard)
+                GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].ExecuteAction.ClickAndGo()
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].IsVisible, 60, 10)
@@ -45,13 +44,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Standa
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice })]
-        public void Standard_PaymentOrder_Invoice_Cancellation(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Standard })]
+        public void Standard_PaymentOrder_Invoice_Cancellation(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
-                GoToOrdersPage(products, payexInfo, Checkout.Standard)
+                GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCancel)].ExecuteAction.ClickAndGo()
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].IsVisible, 60, 10)

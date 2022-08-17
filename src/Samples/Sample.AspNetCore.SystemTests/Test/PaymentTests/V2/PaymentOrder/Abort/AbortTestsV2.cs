@@ -12,12 +12,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Abort
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { true, null })]
-        public void Abort_PaymentOrder(Product[] products)
+        [TestCaseSource(nameof(TestData), new object[] { true, null, Checkout.Anonymous })]
+        public void Abort_PaymentOrder(Product[] products, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-                GoToPayexPaymentPage(products, Checkout.Anonymous)
+                GoToPayexPaymentPage(products, checkout)
                     .Abort.ClickAndGo()
                     .Message.StoreValueAsUri(out var message)
                     .Header.Products.ClickAndGo();

@@ -11,10 +11,10 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.Payment
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish })]
-        public async Task Payment_Swish_Sale(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.LocalPaymentMenu })]
+        public async Task Payment_Swish_Sale(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
-            GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
+            GoToOrdersPage(products, payexInfo, checkout)
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateReversal)].IsVisible, 60, 10)
                 .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateReversal)].Should.BeVisible()
                 .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.PaidPayment)].Should.BeVisible()

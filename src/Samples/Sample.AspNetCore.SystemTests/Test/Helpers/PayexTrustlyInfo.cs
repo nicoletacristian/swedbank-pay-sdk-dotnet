@@ -4,6 +4,7 @@
     {
         public PayexTrustlyInfo()
         {
+            Instrument = PaymentInstrument.Trustly;
         }
     }
 }

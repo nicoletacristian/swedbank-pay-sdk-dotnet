@@ -7,6 +7,7 @@
             CreditCardNumber = creditCardNumber;
             ExpiryDate = expiryDate;
             Cvc = cvc;
+            Instrument = PaymentInstrument.CreditCard;
         }
 
 

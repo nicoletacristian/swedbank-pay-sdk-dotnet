@@ -11,8 +11,8 @@ namespace Sample.AspNetCore.SystemTests.Test.Helpers
             return page
                 .IdentificationFrame.SwitchTo()
                 .Email.IsVisible.WaitTo.BeTrue()
-                .Email.SetWithSpeed(TestDataService.Email, interval: 0.1)
-                .PhoneNumber.SetWithSpeed(TestDataService.SwedishPhoneNumber, interval: 0.1)
+                .Email.Set(TestDataService.Email)
+                .PhoneNumber.Set(TestDataService.SwedishPhoneNumber)
                 .Next.Click()
                 .WaitSeconds(1)
                 .Do(x =>
@@ -20,13 +20,13 @@ namespace Sample.AspNetCore.SystemTests.Test.Helpers
                     if (x.SaveMyInformation.IsVisible)
                     {
                         x.SaveMyInformation.Click();
-                        x.PersonalNumber.SetWithSpeed(TestDataService.PersonalNumber, interval: 0.1);
+                        x.PersonalNumber.Set(TestDataService.PersonalNumber);
                         x.Next.Click();
-                        x.FirstName.SetWithSpeed(TestDataService.FirstName, interval: 0.1);
-                        x.LastName.SetWithSpeed(TestDataService.LastName, interval: 0.1);
-                        x.Address.SetWithSpeed(TestDataService.Street, interval: 0.1);
-                        x.ZipCode.SetWithSpeed(TestDataService.ZipCode, interval: 0.1);
-                        x.City.SetWithSpeed(TestDataService.City, interval: 0.1);
+                        x.FirstName.Set(TestDataService.FirstName);
+                        x.LastName.Set(TestDataService.LastName);
+                        x.Address.Set(TestDataService.Street);
+                        x.ZipCode.Set(TestDataService.ZipCode);
+                        x.City.Set(TestDataService.City);
                         x.Next.Click();
                     }
                 });
@@ -47,16 +47,16 @@ namespace Sample.AspNetCore.SystemTests.Test.Helpers
                                 .Items[
                                     y => y.CreditCardNumber.Value.Contains(
                                         info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Click()
-                                .Cvc.SetWithSpeed(info.Cvc, interval: 0.1);
+                                .Cvc.Set(info.Cvc);
                             }
 
                             x.AddNewCard.Click();
                         }
                     }
 
-                    return x.CreditCardNumber.SetWithSpeed(TestDataService.CreditCardNumber, interval: 0.1)
-                            .ExpiryDate.SetWithSpeed(TestDataService.CreditCardExpirationDate, interval: 0.1)
-                            .Cvc.SetWithSpeed(TestDataService.CreditCardCvc, interval: 0.1);
+                    return x.CreditCardNumber.Set(TestDataService.CreditCardNumber)
+                            .ExpiryDate.Set(TestDataService.CreditCardExpirationDate)
+                            .Cvc.Set(TestDataService.CreditCardCvc);
 
                 })
                 .Pay.Content.Should.BeEquivalent($"Betala {string.Format("{0:N2}", Convert.ToDecimal(products.Sum(x => x.UnitPrice / 100 * x.Quantity)))} kr")
@@ -72,7 +72,8 @@ namespace Sample.AspNetCore.SystemTests.Test.Helpers
                     {
                         x
                         .SwishNumber.IsVisible.WaitTo.BeTrue()
-                        .SwishNumber.SetWithSpeed(info.SwishNumber, interval: 0.1);
+                        .SwishNumber.Clear()
+                        .SwishNumber.Set(info.SwishNumber);
                     }
 
                     return x
@@ -91,15 +92,19 @@ namespace Sample.AspNetCore.SystemTests.Test.Helpers
                     
                     if (checkout == Checkout.Standard)
                     {
-                        x.PersonalNumber.SetWithSpeed(info.PersonalNumber.Substring(info.PersonalNumber.Length - 4), interval: 0.15);
+                        x.PersonalNumber.Set(info.PersonalNumber.Substring(info.PersonalNumber.Length - 4));
                     }
                     else
                     {
                         x
-                        .PersonalNumber.SetWithSpeed(info.PersonalNumber, interval: 0.15)
-                        .Email.SetWithSpeed(info.Email, interval: 0.1)
-                        .PhoneNumber.SetWithSpeed(info.PhoneNumber, interval: 0.1)
-                        .ZipCode.SetWithSpeed(info.ZipCode, interval: 0.1)
+                        .PersonalNumber.Clear()
+                        .PersonalNumber.Set(info.PersonalNumber)
+                        .Email.Clear()
+                        .Email.Set(info.Email)
+                        .PhoneNumber.Clear()
+                        .PhoneNumber.Set(info.PhoneNumber)
+                        .ZipCode.Clear()
+                        .ZipCode.Set(info.ZipCode)
                         .Next.Click();
                     }
 

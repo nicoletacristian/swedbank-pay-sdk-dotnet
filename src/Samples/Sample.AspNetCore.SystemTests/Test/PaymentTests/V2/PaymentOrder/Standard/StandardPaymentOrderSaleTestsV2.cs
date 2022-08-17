@@ -11,13 +11,13 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Standa
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish })]
-        public void Standard_PaymentOrder_Swish_Sale(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.Standard })]
+        public void Standard_PaymentOrder_Swish_Sale(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
 
-                GoToOrdersPage(products, payexInfo, Checkout.Standard)
+                GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderReversal)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderReversal)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].Should.BeVisible()

@@ -8,6 +8,7 @@
             Email = email;
             PhoneNumber = phoneNumber;
             ZipCode = zipCode;
+            Instrument = PaymentInstrument.Invoice;
         }
 
 

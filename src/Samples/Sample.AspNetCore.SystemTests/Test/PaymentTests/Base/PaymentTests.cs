@@ -75,7 +75,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
                     break;
             }
 
-            return page?
+            return page ?
                 .ThankYou.IsVisible.WaitTo.WithinSeconds(120).BeTrue()
                 .Header.Orders.ClickAndGo()
                 .Do(x =>
@@ -116,11 +116,11 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
 
         protected abstract T GoToPayexPaymentFrame<T>(Product[] products, Checkout checkout) where T : Page<T>;
 
-        protected static IEnumerable TestData(bool singleProduct = true, string paymentMethod = PaymentMethods.Card)
+        protected static IEnumerable TestData(bool? singleProduct, string paymentMethod, Checkout checkout)
         {
             var data = new List<object>();
 
-            if (singleProduct)
+            if (!singleProduct.HasValue || singleProduct.Value)
             {
                 data.Add(new[]
                 {
@@ -156,6 +156,8 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
                     data.Add(new PayexTrustlyInfo());
                     break;
             }
+
+            data.Add(checkout);
 
             yield return data.ToArray();
         }

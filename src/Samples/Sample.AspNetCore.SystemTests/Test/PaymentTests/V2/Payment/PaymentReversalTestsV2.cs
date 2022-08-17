@@ -14,10 +14,10 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.Payment
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card })]
-        public async Task Payment_Card_Reversal(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.LocalPaymentMenu })]
+        public async Task Payment_Card_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
-            GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
+            GoToOrdersPage(products, payexInfo, checkout)
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCapture)].IsVisible, 60, 10)
                 .Orders[y => y.Content.Value.Contains(_referenceLink)].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCapture)].ExecuteAction.ClickAndGo()
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateReversal)].IsVisible, 60, 10)
@@ -48,10 +48,10 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.Payment
 
         [Test]
         [Retry(9)] //Retry several times because of the untreatable error: "Activity chain is broken."
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish })]
-        public async Task Payment_Swish_Reversal(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.LocalPaymentMenu })]
+        public async Task Payment_Swish_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
-            GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
+            GoToOrdersPage(products, payexInfo)
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateReversal)].IsVisible, 60, 10)
                 .Orders[y => y.Content.Value.Contains(_referenceLink)].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateReversal)].ExecuteAction.ClickAndGo()
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.ViewPayment)].IsVisible, 60, 10)

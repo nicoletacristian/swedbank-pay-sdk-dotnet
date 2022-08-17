@@ -5,6 +5,7 @@
         public PayexSwishInfo(string swishNumber)
         {
             SwishNumber = swishNumber;
+            Instrument = PaymentInstrument.Swish;
         }
 
 

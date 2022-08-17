@@ -13,12 +13,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Abort
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { true, null })]
-        public void Abort_PaymentOrder(Product[] products)
+        [TestCaseSource(nameof(TestData), new object[] { true, null, Checkout.Redirect })]
+        public void Abort_PaymentOrder(Product[] products, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-                var frame = GoToPayexPaymentPage(products, Checkout.Redirect)
+                var frame = GoToPayexPaymentPage(products, checkout)
                     .PaymentMethodsFrameRedirect.SwitchTo<PaymentFramePage>();
 
                 var orderLink = frame.PageSource.GetPaymentOrderFromBody();

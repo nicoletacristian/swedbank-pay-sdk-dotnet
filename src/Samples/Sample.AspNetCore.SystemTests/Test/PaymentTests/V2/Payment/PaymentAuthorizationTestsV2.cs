@@ -12,10 +12,10 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.Payment
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card })]
-        public async Task Payment_Card_Authorization(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.LocalPaymentMenu })]
+        public async Task Payment_Card_Authorization(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
-            GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
+            GoToOrdersPage(products, payexInfo, checkout)
                 .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].IsVisible, 60, 10)
                 .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].Should.BeVisible()
                 .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCapture)].Should.BeVisible()

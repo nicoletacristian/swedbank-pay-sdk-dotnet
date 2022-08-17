@@ -2,5 +2,6 @@
 {
     public abstract class PayexInfo
     {
+        public PaymentInstrument Instrument { get; set; }
     }
 }

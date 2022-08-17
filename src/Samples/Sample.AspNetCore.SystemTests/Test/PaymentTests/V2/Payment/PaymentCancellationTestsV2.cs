@@ -10,13 +10,12 @@
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card })]
-        public void Payment_Card_Cancellation(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.LocalPaymentMenu })]
+        public void Payment_Card_Cancellation(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
-                GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
+                GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].IsVisible, 60, 10)
                     .Orders[y => y.Content.Value.Contains(_referenceLink)].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].ExecuteAction.ClickAndGo()
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.PaidPayment)].IsVisible, 60, 10)
@@ -42,12 +41,12 @@
         }
 
         [Test]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice })]
-        public void Payment_Invoice_Cancellation(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.LocalPaymentMenu })]
+        public void Payment_Invoice_Cancellation(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-                GoToOrdersPage(products, payexInfo, Checkout.LocalPaymentMenu)
+                GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentResourceOperations.CreateCancellation)].ExecuteAction.ClickAndGo()
                     .Orders[y => y.Attributes["data-paymentlink"] == _referenceLink].Clear.ClickAndGo();

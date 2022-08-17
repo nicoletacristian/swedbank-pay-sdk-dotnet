@@ -13,12 +13,11 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Anonym
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card })]
-        public void Anonymous_PaymentOrder_Card_Reversal(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Anonymous })]
+        public void Anonymous_PaymentOrder_Card_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout )
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
                 GoToOrdersPage(products, payexInfo, Checkout.Anonymous)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCapture)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCapture)].ExecuteAction.ClickAndGo()
@@ -50,13 +49,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Anonym
 
         [Test]
         [Retry(5)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish })]
-        public void Anonymous_PaymentOrder_Swish_Reversal(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.Anonymous })]
+        public void Anonymous_PaymentOrder_Swish_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout )
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
-                GoToOrdersPage(products, payexInfo, Checkout.Anonymous)
+                GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderReversal)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderReversal)].ExecuteAction.ClickAndGo()
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.PaidPaymentOrder)].IsVisible, 60, 10)
@@ -95,13 +93,12 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V2.PaymentOrder.Anonym
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice })]
-        public void Anonymous_PaymentOrder_Invoice_Reversal(Product[] products, PayexInfo payexInfo)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Anonymous })]
+        public void Anonymous_PaymentOrder_Invoice_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout )
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
-                _ = GoToOrdersPage(products, payexInfo, Checkout.Anonymous)
+                _ = GoToOrdersPage(products, payexInfo, checkout)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderCapture)].ExecuteAction.ClickAndGo()
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderReversal)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.CreatePaymentOrderReversal)].ExecuteAction.ClickAndGo()
