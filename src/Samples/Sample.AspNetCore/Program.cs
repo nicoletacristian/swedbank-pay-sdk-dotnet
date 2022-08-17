@@ -14,6 +14,7 @@ namespace Sample.AspNetCore
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddEnvironmentVariables();
+                    config.AddUserSecrets<Program>();
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }
