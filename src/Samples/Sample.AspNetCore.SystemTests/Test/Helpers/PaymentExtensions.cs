@@ -45,9 +45,10 @@ namespace Sample.AspNetCore.SystemTests.Test.Helpers
                             {
                                 return x.PreFilledCards
                                 .Items[
-                                    y => y.CreditCardNumber.Value.Contains(
-                                        info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Click()
-                                .Cvc.Set(info.Cvc);
+                                    y => y
+                                        .CreditCardNumber.Value.Contains(
+                                            info.CreditCardNumber.Substring(info.CreditCardNumber.Length - 4))].Click()
+                                        .EmbeddedCvc.Set(info.Cvc);
                             }
 
                             x.AddNewCard.Click();

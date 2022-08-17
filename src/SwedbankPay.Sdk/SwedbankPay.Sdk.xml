@@ -1513,7 +1513,7 @@
         </member>
         <member name="F:SwedbankPay.Sdk.LinkRelation.Abort">
             <summary>
-            <seealso cref="T:SwedbankPay.Sdk.LinkRelation"/> for PaymentOrder UpdateAbort.
+            <seealso cref="T:SwedbankPay.Sdk.LinkRelation"/> for PaymentOrder Abort.
             </summary>
         </member>
         <member name="F:SwedbankPay.Sdk.LinkRelation.CreatePaymentOrderReversal">

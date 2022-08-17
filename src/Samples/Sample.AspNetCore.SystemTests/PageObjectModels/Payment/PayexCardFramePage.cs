@@ -25,6 +25,9 @@ namespace Sample.AspNetCore.SystemTests.PageObjectModels.Payment
         [FindById(TermMatch.Contains, "cvcInput")]
         public TelInput<_> Cvc { get; set; }
 
+        [FindById(TermMatch.Contains, "cvcInput2")]
+        public TelInput<_> EmbeddedCvc { get; set; }
+
         [FindById("expiryInput")]
         public TelInput<_> ExpiryDate { get; set; }
 

@@ -1,11 +1,11 @@
 ﻿using SwedbankPay.Sdk.PaymentOrders.V3;
 using System.Threading.Tasks;
 
-namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redirect
+namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Seamless
 {
-    public class RedirectPaymentOrderAuthorizationTestsV3 : Base.PaymentTestsV3
+    public class SeamlessPaymentOrderAuthorizationTestsV3 : Base.PaymentTestsV3
     {
-        public RedirectPaymentOrderAuthorizationTestsV3(string driverAlias)
+        public SeamlessPaymentOrderAuthorizationTestsV3(string driverAlias)
             : base(driverAlias)
         {
         }
@@ -13,9 +13,9 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Redirect })]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Redirect })]
-        public void Redirect_PaymentOrder_Authorization(Product[] products, PayexInfo payexInfo, Checkout checkout)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Seamless })]
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Seamless })]
+        public void Seamless_PaymentOrder_Authorization(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {

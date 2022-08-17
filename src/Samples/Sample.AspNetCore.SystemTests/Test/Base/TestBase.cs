@@ -28,13 +28,12 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
         {
             TestContext.Out?.WriteLine("Running: " + TestContext.CurrentContext.Test.Name);
 
-            //this.testWebApplicationFactory = new TestWebApplicationFactory();
+            _testWebApplicationFactory = new TestWebApplicationFactory();
             var chromeOptions = DriverOptionsFactory.GetDriverOptions(Driver.Chrome) as ChromeOptions;
             AtataContext.Configure()
                         .UseChrome()
                         .WithOptions(chromeOptions)
-                        //.UseBaseUrl(_testWebApplicationFactory.RootUri)
-                        .UseBaseUrl("https://localhost:44391/")
+                        .UseBaseUrl(_testWebApplicationFactory.RootUri)
                         .Build();
         }
 

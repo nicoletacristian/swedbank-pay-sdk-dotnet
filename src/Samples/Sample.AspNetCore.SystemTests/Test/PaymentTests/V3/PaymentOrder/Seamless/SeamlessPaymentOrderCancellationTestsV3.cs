@@ -1,19 +1,19 @@
 ﻿using SwedbankPay.Sdk.PaymentOrders.V3;
 
-namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redirect
+namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Seamless
 {
-    public class RedirectPaymentOrderCancellationTestsV3 : Base.PaymentTestsV3
+    public class SeamlessPaymentOrderCancellationTestsV3 : Base.PaymentTestsV3
     {
-        public RedirectPaymentOrderCancellationTestsV3(string driverAlias)
+        public SeamlessPaymentOrderCancellationTestsV3(string driverAlias)
             : base(driverAlias)
         {
         }
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Redirect })]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Redirect })]
-        public void Redirect_PaymentOrder_Cancellation(Product[] products, PayexInfo payexInfo, Checkout checkout)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Seamless })]
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Seamless })]
+        public void Seamless_PaymentOrder_Cancellation(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {

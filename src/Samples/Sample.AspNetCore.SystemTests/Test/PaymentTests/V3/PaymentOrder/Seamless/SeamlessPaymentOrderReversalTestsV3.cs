@@ -1,11 +1,11 @@
 ﻿using SwedbankPay.Sdk.PaymentOrders.V3;
 using System.Threading;
 
-namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redirect
+namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Seamless
 {
-    public class RedirectPaymentOrderReversalTestsV3 : Base.PaymentTestsV3
+    public class SeamlessPaymentOrderReversalTestsV3 : Base.PaymentTestsV3
     {
-        public RedirectPaymentOrderReversalTestsV3(string driverAlias)
+        public SeamlessPaymentOrderReversalTestsV3(string driverAlias)
             : base(driverAlias)
         {
         }
@@ -13,10 +13,10 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Redirect })]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.Redirect })]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Redirect })]
-        public void Redirect_PaymentOrder_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Seamless })]
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.Seamless })]
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Seamless })]
+        public void Seamless_PaymentOrder_Reversal(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {

@@ -1,11 +1,10 @@
 ﻿using SwedbankPay.Sdk.PaymentOrders.V3;
-using System.Threading.Tasks;
 
-namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redirect
+namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Seamless
 {
-    public class RedirectPaymentOrderAuthorizationTestsV3 : Base.PaymentTestsV3
+    public class SeamlessPaymentOrderSaleTestsV3 : Base.PaymentTestsV3
     {
-        public RedirectPaymentOrderAuthorizationTestsV3(string driverAlias)
+        public SeamlessPaymentOrderSaleTestsV3(string driverAlias)
             : base(driverAlias)
         {
         }
@@ -13,16 +12,14 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
 
         [Test]
         [Retry(2)]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Card, Checkout.Redirect })]
-        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Invoice, Checkout.Redirect })]
-        public void Redirect_PaymentOrder_Authorization(Product[] products, PayexInfo payexInfo, Checkout checkout)
+        [TestCaseSource(nameof(TestData), new object[] { false, PaymentMethods.Swish, Checkout.Seamless })]
+        public void Seamless_PaymentOrder_Swish_Sale(Product[] products, PayexInfo payexInfo, Checkout checkout)
         {
             Assert.DoesNotThrowAsync(async () =>
             {
                 GoToOrdersPage(products, payexInfo, checkout)
-                    .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.Cancel)].Should.BeVisible()
-                    .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.Capture)].Should.BeVisible()
-                    .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.RedirectCheckout)].Should.BeVisible()
+                    .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.Reversal)].IsVisible, 60, 10)
+                    .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.Reversal)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.ViewCheckout)].Should.BeVisible()
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Clear.ClickAndGo();
 
@@ -34,22 +31,17 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
                 Assert.That(order.PaymentOrder.Status, Is.EqualTo(Status.Paid));
 
                 // Operations
-                Assert.That(order.Operations.Cancel, Is.Not.Null);
-                Assert.That(order.Operations.Capture, Is.Not.Null);
-                Assert.That(order.Operations.Redirect, Is.Not.Null);
+                Assert.That(order.Operations.Cancel, Is.Null);
+                Assert.That(order.Operations.Capture, Is.Null);
+                Assert.That(order.Operations.Reverse, Is.Not.Null);
                 Assert.That(order.Operations.View, Is.Not.Null);
 
-                Assert.That(order.Operations.Reverse, Is.Null);
-                Assert.That(order.Operations.Update, Is.Null);
-                Assert.That(order.Operations.Abort, Is.Null);
-
                 // Transactions
-                Assert.That(order.PaymentOrder.History.HistoryList.Count, Is.EqualTo(5));
+                Assert.That(order.PaymentOrder.History.HistoryList.Count, Is.EqualTo(6));
                 Assert.That(order.PaymentOrder.History.HistoryList.Last().Instrument, Is.EqualTo(payexInfo.Instrument.ToString()));
                 Assert.That(order.PaymentOrder.History.HistoryList.Last().Name, Is.EqualTo("PaymentPaid"));
 
                 // Order Items
-
                 Assert.That(order.PaymentOrder.OrderItems.OrderItemList.Count, Is.EqualTo(products.Length));
                 for (var i = 0; i < products.Length; i++)
                 {
@@ -60,6 +52,5 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
                 }
             });
         }
-
     }
 }

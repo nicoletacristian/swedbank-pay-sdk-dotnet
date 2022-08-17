@@ -17,7 +17,6 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
         {
             Assert.DoesNotThrowAsync(async () =>
             {
-
                 GoToOrdersPage(products, payexInfo, checkout)
                     .RefreshPageUntil(x => x.Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.Reversal)].IsVisible, 60, 10)
                     .Orders[y => y.Attributes["data-paymentorderlink"] == _referenceLink].Actions.Rows[y => y.Name.Value.Contains(PaymentOrderResourceOperations.Reversal)].Should.BeVisible()
@@ -39,7 +38,7 @@ namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.V3.PaymentOrder.Redire
 
                 // Transactions
                 Assert.That(order.PaymentOrder.History.HistoryList.Count, Is.EqualTo(6));
-                Assert.That(order.PaymentOrder.History.HistoryList.Last().Instrument, Is.EqualTo(PaymentInstrument.Swish));
+                Assert.That(order.PaymentOrder.History.HistoryList.Last().Instrument, Is.EqualTo(payexInfo.Instrument.ToString()));
                 Assert.That(order.PaymentOrder.History.HistoryList.Last().Name, Is.EqualTo("PaymentPaid"));
 
                 // Order Items
