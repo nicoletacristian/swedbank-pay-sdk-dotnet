@@ -10,10 +10,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-[assembly: LevelOfParallelism(1)]
 namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
 {
-    [Parallelizable(scope: ParallelScope.All)]
     public abstract class PaymentTests : TestBase
     {
         protected string _referenceLink;

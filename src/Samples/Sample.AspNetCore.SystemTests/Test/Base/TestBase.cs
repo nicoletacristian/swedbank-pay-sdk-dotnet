@@ -15,12 +15,14 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            AtataContext.GlobalConfiguration.
-                UseChrome().
-                    WithOptions(DriverOptionsFactory.GetDriverOptions(Driver.Chrome) as ChromeOptions).
-                LogConsumers.AddNUnitTestContext().
-                WithMinLevel(LogLevel.Error).
-                UseBaseRetryTimeout(TimeSpan.FromSeconds(20));
+            _testWebApplicationFactory = new TestWebApplicationFactory();
+
+            AtataContext.GlobalConfiguration
+                .UseChrome()
+                    .WithOptions(DriverOptionsFactory.GetDriverOptions(Driver.Chrome) as ChromeOptions)
+                .LogConsumers.AddNUnitTestContext()
+                .WithMinLevel(LogLevel.Error)
+                .UseBaseRetryTimeout(TimeSpan.FromSeconds(20));
         }
 
         [SetUp]
@@ -28,7 +30,6 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
         {
             TestContext.Out?.WriteLine("Running: " + TestContext.CurrentContext.Test.Name);
 
-            _testWebApplicationFactory = new TestWebApplicationFactory();
             var chromeOptions = DriverOptionsFactory.GetDriverOptions(Driver.Chrome) as ChromeOptions;
             AtataContext.Configure()
                         .UseChrome()
@@ -51,6 +52,11 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
             }
 
             AtataContext.Current?.CleanUp();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
             _testWebApplicationFactory?.Dispose();
         }
 

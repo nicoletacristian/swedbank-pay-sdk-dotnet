@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sample.AspNetCore.Models;
 using System.IO;
@@ -18,7 +19,7 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
         public string RootUri { get; set; } //Save this use by tests
 
         private const string SampleProjectLocation = "./../../../../Sample.AspNetCore";
-        IWebHost _host;
+        private IWebHost _host;
 
         public TestWebApplicationFactory()
         {
@@ -29,6 +30,12 @@ namespace Sample.AspNetCore.SystemTests.Test.Base
 
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
+            builder.ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddEnvironmentVariables();
+                config.AddUserSecrets<Program>();
+            });
+
             //Real TCP port
             _host = builder.Build();
             _host.Start();
