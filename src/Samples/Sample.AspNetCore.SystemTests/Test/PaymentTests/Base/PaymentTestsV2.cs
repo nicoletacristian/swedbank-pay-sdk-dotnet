@@ -3,6 +3,7 @@ using Sample.AspNetCore.SystemTests.Services;
 
 namespace Sample.AspNetCore.SystemTests.Test.PaymentTests.Base
 {
+    [Category("v2")]
     public abstract class PaymentTestsV2 : PaymentTests
     {
         public PaymentTestsV2(string driverAlias)
